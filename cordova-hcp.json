@@ -1,3 +1,4 @@
+//热加载 cordova-hcp server
 {
   "update": "start",
   "content_url": "http://localhost:8100/inpatientWardApp/www/"
