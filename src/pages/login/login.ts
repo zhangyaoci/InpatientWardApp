@@ -7,6 +7,10 @@ import { TabsPage } from '../tabs/tabs';
 
 import {HttpServiceProvider} from "../../providers/http-service/http-service";
 import {User} from "../../model/user";
+import {AmendPasswordPage} from "../amend-password/amend-password";
+import {RegisterPage} from "../register/register"
+import {UserServiceProvider} from "../../providers/user-service/user-service";
+import {StorageServiceProvider} from "../../providers/storage-service/storage-service";
 
 
 /**
@@ -26,34 +30,41 @@ export class LoginPage {
 
 
   user:User=new User();
+  message:any;
 
   /*注入Service服务*/
-  constructor(private app: App,public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServiceProvider) {
+  constructor(private app: App,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public userService:UserServiceProvider,
+              public storageService:StorageServiceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-
-  //登录成后跳转的页面
-  loginOnSuccess(){
-    this.app.getRootNav().setRoot(TabsPage);
+  //忘记密码
+  forgetPassword(){
+    this.navCtrl.push(AmendPasswordPage);
   }
+
+  //新用户注册
+  registerUser(){
+    this.navCtrl.push(RegisterPage);
+  }
+
 
 
   //用户进行登录验证
   doLogin() {
-    this.loginOnSuccess();
-    /*let urlMethod = '/loginAction_login';
-    this.httpService.postSerialization(urlMethod, this.user).then(
-      res=>{
-         console.log(JSON.stringify(res));
-         this.loginOnSuccess();
-        },err=>{
-            console.log("错误信息"+err)
-      }).catch(exception=>{
-        console.log("报错信息"+exception)
-    });*/
+   this.userService.login(this.user,returnMessage=>{
+     if(returnMessage=="登录成功"){
+       this.storageService.write("phone",this.user._phone);
+       this.app.getRootNav().setRoot(TabsPage);
+     }
+     else{
+       this.message=returnMessage;
+     }});
   }
 }

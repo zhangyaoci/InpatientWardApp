@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 
+
 //导入画图模块
 import { ChartsModule } from 'ng2-charts';
 
@@ -21,6 +22,8 @@ import { MyApp } from './app.component';
 
 //http数据请求服务
 import { HttpServiceProvider } from '../providers/http-service/http-service';
+import { StorageServiceProvider } from '../providers/storage-service/storage-service';
+
 
 //引入页面
 import { AboutPage } from '../pages/about/about';
@@ -28,6 +31,10 @@ import { ContactPage } from '../pages/contact/contact';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
+import {AmendPasswordPage} from "../pages/amend-password/amend-password";
+import { RegisterPageModule } from "../pages/register/register.module"
+import { UserServiceProvider } from '../providers/user-service/user-service';
+
 
 
 @NgModule({
@@ -37,7 +44,8 @@ import {LoginPage} from "../pages/login/login";
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    AmendPasswordPage
 
   ],
   imports: [
@@ -48,7 +56,8 @@ import {LoginPage} from "../pages/login/login";
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', //隐藏全部子页面 tabs
       backButtonText: '返回' /*配置返回按钮*/
-    })
+    }),
+    RegisterPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,13 +66,16 @@ import {LoginPage} from "../pages/login/login";
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    AmendPasswordPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpServiceProvider
+    HttpServiceProvider,
+    StorageServiceProvider,
+    UserServiceProvider
   ]
 })
 export class AppModule {}
