@@ -20,19 +20,22 @@ import { ComponentsModule } from '../components/components.module';
 import { MyApp } from './app.component';
 
 
+//引入页面
+import { TabsPage } from '../pages/tabs/tabs';
+import { MenusPage} from "../pages/menus/menus";
+import { InfoPage} from "../pages/info/info"
+import { HomePage } from '../pages/home/home';
+import { PatientsPage } from '../pages/patients/patients';
+import { NewsPage } from '../pages/news/news';
+import { LoginPage} from "../pages/login/login";
+import { AmendPasswordPage} from "../pages/amend-password/amend-password";
+import { RegisterPage} from "../pages/register/register"
+
+
+
 //http数据请求服务
 import { HttpServiceProvider } from '../providers/http-service/http-service';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
-
-
-//引入页面
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
-import {LoginPage} from "../pages/login/login";
-import {AmendPasswordPage} from "../pages/amend-password/amend-password";
-import { RegisterPageModule } from "../pages/register/register.module"
 import { UserServiceProvider } from '../providers/user-service/user-service';
 
 
@@ -40,13 +43,15 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
     TabsPage,
+    PatientsPage,
+    NewsPage,
+    MenusPage,
+    HomePage,
+    InfoPage,
     LoginPage,
-    AmendPasswordPage
-
+    AmendPasswordPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -56,18 +61,20 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', //隐藏全部子页面 tabs
       backButtonText: '返回' /*配置返回按钮*/
-    }),
-    RegisterPageModule
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
     TabsPage,
+    PatientsPage,
+    NewsPage,
+    MenusPage,
+    HomePage,
+    InfoPage,
     LoginPage,
-    AmendPasswordPage
+    AmendPasswordPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
+  <ion-tab [root]="tab1Root" tabTitle="主页" tabIcon="home"   [rootParams]="1" ></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="消息" tabIcon="text"   [rootParams]="2" tabBadge="14"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="家人" tabIcon="people" [rootParams]="3"></ion-tab>
 </ion-tabs>

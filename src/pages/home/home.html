@@ -1,14 +1,48 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>主页</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
 
-  <h2>这是一个首页展示</h2>
-  <div style="width:75%;">
-    <canvas  #chartBar ></canvas>
-  </div>
+<ion-content >
+
+  <ion-list>
+    <div class="home_img">
+      <img src="../../assets/imgs/home.jpg">
+    </div>
+
+    <ion-grid class="grid_home">
+      <ion-row >
+        <ion-col col-4>
+          <img  src="../../assets/imgs/bloodPressure.png">
+          <div >血压</div>
+        </ion-col >
+        <ion-col  col-4>
+          <img  src="../../assets/imgs/temperature.png">
+          <div >体温</div>
+        </ion-col>
+        <ion-col  col-4>
+          <img  src="../../assets/imgs/heartRate.png">
+          <div >心率</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <img  src="../../assets/imgs/bloodGlucose.png">
+          <div >血糖</div>
+        </ion-col >
+        <ion-col  col-4>
+          <img  src="../../assets/imgs/OS.png">
+          <div >血氧饱和度</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-list>
+
 </ion-content>
 

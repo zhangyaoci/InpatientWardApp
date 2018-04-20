@@ -22,7 +22,7 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,storageService:StorageServiceProvider) {
 
       //本地存储用户信息
-      if(storageService.read('name1')) {
+      if(storageService.read('phone')) {
         this.rootPage = TabsPage;
       } else {
         this.rootPage = LoginPage;
