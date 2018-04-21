@@ -1,5 +1,5 @@
 export class  User{
-  private userName:String;
+  private name:String;
   private password:String;
   private sex:String;
   private phone:String;

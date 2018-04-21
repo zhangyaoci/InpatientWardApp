@@ -33,7 +33,7 @@ export class HttpServiceProvider {
   //post请求返回一个Promise对象
   public postSerializationPromise(urlMethod,data):Promise<object>{
     return new Promise((resolve, reject) => {
-      this.http.post( 'inpatientWardAppServer' + urlMethod + '', {user:data}, this.httpOptions)
+      this.http.post( 'inpatientWardAppServer' + urlMethod + '',data, this.httpOptions)
         .subscribe(data => resolve(data), err => reject(err));
     })
   }
