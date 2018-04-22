@@ -1,4 +1,5 @@
 export class  User{
+  private userId:number;
   private name:String;
   private password:String;
   private sex:String;

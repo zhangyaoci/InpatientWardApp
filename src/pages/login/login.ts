@@ -56,12 +56,14 @@ export class LoginPage {
 
 
 
+
+
   //用户进行登录验证
   doLogin() {
    this.userService.login(this.user,returnMessage=>{
-     if(returnMessage=="登录成功"){
-       this.storageService.write("phone",this.user._phone);
-       this.app.getRootNav().setRoot(TabsPage);
+     if(returnMessage.hasOwnProperty("phone")){
+       this.storageService.write("userLocal",returnMessage);
+       this.app.getRootNav().setRoot(TabsPage,{"user":returnMessage});
      }
      else{
        this.message=returnMessage;

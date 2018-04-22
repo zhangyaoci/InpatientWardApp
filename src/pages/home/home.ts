@@ -15,4 +15,8 @@ export class HomePage {
      menu.enable(true);
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HomePage');
+  }
+
 }
