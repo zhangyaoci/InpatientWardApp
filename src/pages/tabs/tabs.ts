@@ -20,19 +20,13 @@ export class TabsPage {
   tab2Root = NewsPage;
   tab3Root = PatientsPage;
 
-  user:User=new User();
   constructor(public navParams: NavParams,
               public storageService :StorageServiceProvider,
               public userService:UserServiceProvider) {
-    //console.log("用户信息",this.navParams.get("user"));
-    if(this.navParams.get("user")==null){
-     // console.log("storage中保存的数据",this.storageService.read("userLocal"));
-      this.user=this.storageService.read("userLocal");
+    if(this.userService.user==null){
+      // console.log("storage中保存的数据",this.storageService.read("userLocal"));
       this.userService.user=this.storageService.read("userLocal");
-    }else{
-      this.user=this.navParams.get("user");
     }
-
 
   }
 

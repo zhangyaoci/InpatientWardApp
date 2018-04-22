@@ -63,7 +63,7 @@ export class LoginPage {
    this.userService.login(this.user,returnMessage=>{
      if(returnMessage.hasOwnProperty("phone")){
        this.storageService.write("userLocal",returnMessage);
-       this.app.getRootNav().setRoot(TabsPage,{"user":returnMessage});
+       this.app.getRootNav().setRoot(TabsPage);
      }
      else{
        this.message=returnMessage;
