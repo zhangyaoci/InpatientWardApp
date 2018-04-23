@@ -12,4 +12,7 @@ export class  User{
   get _phone(): String {
     return this.phone;
   }
+  get _userId():number{
+    return this.userId;
+  }
 }

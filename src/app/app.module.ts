@@ -37,6 +37,7 @@ import { RegisterPage} from "../pages/register/register"
 import { HttpServiceProvider } from '../providers/http-service/http-service';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { PatientServiceProvider } from '../providers/patient-service/patient-service';
 
 
 
@@ -82,7 +83,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpServiceProvider,
     StorageServiceProvider,
-    UserServiceProvider
+    UserServiceProvider,
+    PatientServiceProvider
   ]
 })
 export class AppModule {}
