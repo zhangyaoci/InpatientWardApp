@@ -1,0 +1,84 @@
+<!--
+  Generated template for the PatientsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>家人</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div padding>
+    <ion-segment [(ngModel)]="people">
+      <ion-segment-button value="patients">
+        家人
+      </ion-segment-button>
+      <ion-segment-button value="doctors">
+        医生
+      </ion-segment-button>
+      <ion-segment-button value="nurses">
+        护士
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="people">
+
+
+
+    <ion-list *ngSwitchCase="'patients'" >
+
+      <ion-item *ngFor="let patient of patients"  (click)="getInfoPatient(patient)">
+        <ion-thumbnail item-start>
+          <img [src]="patient.sex==1?'../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'">
+        </ion-thumbnail>
+
+        <div class="font_size">
+          <div>{{patient.relationShip}}</div>
+          <div class="padding_m">病房号:{{patient.hospitalState==1?patient.roomNumber:'无'}}</div>
+        </div>
+
+        <div item-end class="font_size">
+          <div>&nbsp;</div>
+          <div class="padding_m">{{patient.hospitalState==1?'正在住院':'已经出院'}}</div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+
+
+
+
+
+
+
+    <ion-list *ngSwitchCase="'doctors'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/imgs/grandma.png">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+    </ion-list>
+
+
+
+
+
+
+    <ion-list *ngSwitchCase="'nurses'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/imgs/grandma.png">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+</ion-content>

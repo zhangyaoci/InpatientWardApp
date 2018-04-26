@@ -1,0 +1,21 @@
+page-patient-info {
+  .m_grid{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  .m_h6{
+    color: red;
+  }
+  .m_grid_hospital{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .img_patient{
+    position: absolute;
+    left: 282px;
+    top: 22px;
+    width: 60px;
+    height: 60px;
+  }
+}
