@@ -23,25 +23,25 @@
 
     <ion-grid class="grid_home">
       <ion-row >
-        <ion-col col-4>
+        <ion-col col-4 (click)="toBP()">
           <img  src="../../assets/imgs/bloodPressure.png">
           <div >血压</div>
         </ion-col >
-        <ion-col  col-4>
+        <ion-col  col-4 (click)="toTem()">
           <img  src="../../assets/imgs/temperature.png">
           <div >体温</div>
         </ion-col>
-        <ion-col  col-4>
+        <ion-col  col-4 (click)="toHR()">
           <img  src="../../assets/imgs/heartRate.png">
           <div >心率</div>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-4>
+        <ion-col col-4 (click)="toBG()">
           <img  src="../../assets/imgs/bloodGlucose.png">
           <div >血糖</div>
         </ion-col >
-        <ion-col  col-4>
+        <ion-col  col-4 (click)="toBOG()">
           <img  src="../../assets/imgs/OS.png">
           <div >血氧饱和度</div>
         </ion-col>

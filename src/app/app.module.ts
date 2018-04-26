@@ -29,7 +29,15 @@ import { PatientsPage } from '../pages/patients/patients';
 import { NewsPage } from '../pages/news/news';
 import { LoginPage} from "../pages/login/login";
 import { AmendPasswordPage} from "../pages/amend-password/amend-password";
-import { RegisterPage} from "../pages/register/register"
+import { RegisterPage} from "../pages/register/register";
+import { PatientInfoPage} from "../pages/patient-info/patient-info";
+import { NurseInfoPage} from "../pages/nurse-info/nurse-info";
+import { DoctorInfoPage} from "../pages/doctor-info/doctor-info";
+import { BgPage} from "../pages/bg/bg";
+import { BogPage} from "../pages/bog/bog";
+import { BpPage} from "../pages/bp/bp";
+import { HrPage} from "../pages/hr/hr";
+import { TemPage} from "../pages/tem/tem";
 
 
 
@@ -38,6 +46,9 @@ import { HttpServiceProvider } from '../providers/http-service/http-service';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PatientServiceProvider } from '../providers/patient-service/patient-service';
+import { DoctorServiceProvider } from '../providers/doctor-service/doctor-service';
+import { NurseServiceProvider } from '../providers/nurse-service/nurse-service';
+import { HospitalizationServiceProvider } from '../providers/hospitalization-service/hospitalization-service';
 
 
 
@@ -52,7 +63,15 @@ import { PatientServiceProvider } from '../providers/patient-service/patient-ser
     InfoPage,
     LoginPage,
     AmendPasswordPage,
-    RegisterPage
+    RegisterPage,
+    PatientInfoPage,
+    NurseInfoPage,
+    DoctorInfoPage,
+    BpPage,
+    BgPage,
+    BogPage,
+    HrPage,
+    TemPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +94,15 @@ import { PatientServiceProvider } from '../providers/patient-service/patient-ser
     InfoPage,
     LoginPage,
     AmendPasswordPage,
-    RegisterPage
+    RegisterPage,
+    PatientInfoPage,
+    NurseInfoPage,
+    DoctorInfoPage,
+    BpPage,
+    BgPage,
+    BogPage,
+    HrPage,
+    TemPage
   ],
   providers: [
     StatusBar,
@@ -84,7 +111,10 @@ import { PatientServiceProvider } from '../providers/patient-service/patient-ser
     HttpServiceProvider,
     StorageServiceProvider,
     UserServiceProvider,
-    PatientServiceProvider
+    PatientServiceProvider,
+    DoctorServiceProvider,
+    NurseServiceProvider,
+    HospitalizationServiceProvider
   ]
 })
 export class AppModule {}
