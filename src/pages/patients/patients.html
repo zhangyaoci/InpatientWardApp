@@ -17,10 +17,10 @@
       <ion-segment-button value="patients">
         家人
       </ion-segment-button>
-      <ion-segment-button value="doctors">
+      <ion-segment-button value="doctors" >
         医生
       </ion-segment-button>
-      <ion-segment-button value="nurses">
+      <ion-segment-button value="nurses"  >
         护士
       </ion-segment-button>
     </ion-segment>
@@ -56,12 +56,19 @@
 
 
 
-    <ion-list *ngSwitchCase="'doctors'">
-      <ion-item>
+    <ion-list *ngSwitchCase="'doctors'"  >
+      <ion-item *ngFor="let doctor of doctors" (click)="toDoctor(doctor)">
         <ion-thumbnail item-start>
-          <img src="../../assets/imgs/grandma.png">
+          <img [src]="doctor.sex==1?'../../assets/imgs/25.png':'../../assets/imgs/27.png'">
         </ion-thumbnail>
-        <h2>Luna</h2>
+
+        <div class="font_size">
+          姓名：{{doctor.name}}
+        </div>
+
+        <div class="font_size" item-end>
+          科室：{{doctor.department}}
+        </div>
       </ion-item>
     </ion-list>
 
@@ -71,11 +78,14 @@
 
 
     <ion-list *ngSwitchCase="'nurses'">
-      <ion-item>
+      <ion-item *ngFor="let nurse of nurses" (click)="toNurse(nurse)">
         <ion-thumbnail item-start>
-          <img src="../../assets/imgs/grandma.png">
+          <img [src]="nurse.sex==1?'../../assets/imgs/25.png':'../../assets/imgs/27.png'">
         </ion-thumbnail>
-        <h2>Luna</h2>
+
+        <div class="font_size">
+          姓名：{{nurse.name}}
+        </div>
       </ion-item>
     </ion-list>
   </div>

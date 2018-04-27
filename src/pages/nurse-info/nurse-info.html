@@ -7,12 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>nurseInfo</ion-title>
+    <ion-title>护士的详细信息</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid class="m_grid">
+    <ion-row>
+      <ion-col col-12 >姓名：{{nurse.name}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>性别：{{nurse.sex==1?"男":"女"}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>联系电话：{{nurse.phone}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>护士简介：{{nurse.introduction}} </ion-col>
+    </ion-row>
 
+    <div class="img_nurse">
+      <ion-avatar>
+        <img [src]="nurse.sex==1?'../../assets/imgs/25.png':'../../assets/imgs/27.png'">
+      </ion-avatar>
+    </div>
+  </ion-grid>
 </ion-content>

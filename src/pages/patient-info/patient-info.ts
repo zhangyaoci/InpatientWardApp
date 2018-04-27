@@ -4,6 +4,10 @@ import {PatientServiceProvider} from "../../providers/patient-service/patient-se
 import {Patient} from "../../model/patient";
 import {Hospitalization} from "../../model/hospitalization";
 import {User} from "../../model/user";
+import {Doctor} from "../../model/doctor";
+import {DoctorInfoPage} from "../doctor-info/doctor-info";
+import {NurseInfoPage} from "../nurse-info/nurse-info";
+import {Nurse} from "../../model/nurse";
 
 /**
  * Generated class for the PatientInfoPage page.
@@ -51,4 +55,13 @@ export class PatientInfoPage {
     console.log('ionViewDidLoad PatientInfoPage');
   }
 
+  //跳转到医生的详细信息页面
+  checkDoctor(doctor:Doctor){
+      this.navCtrl.push(DoctorInfoPage,doctor);
+  }
+
+  //跳转到护士的详细信息页面
+  checkNurse(nurse:Nurse){
+    this.navCtrl.push(NurseInfoPage,nurse);
+  }
 }

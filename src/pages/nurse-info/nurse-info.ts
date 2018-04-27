@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Nurse} from "../../model/nurse";
 
 /**
  * Generated class for the NurseInfoPage page.
@@ -15,7 +16,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NurseInfoPage {
 
+  nurse:Nurse=new Nurse();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.nurse=this.navParams.data;
   }
 
   ionViewDidLoad() {

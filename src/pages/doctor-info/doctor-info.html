@@ -7,12 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>doctorInfo</ion-title>
+    <ion-title>医生的详细信息</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid class="m_grid">
+    <ion-row>
+      <ion-col col-12 >姓名：{{doctor.name}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>性别：{{doctor.sex==1?"男":"女"}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>科室：{{doctor.department}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>联系电话：{{doctor.phone}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>医生简介：{{doctor.introduction}} </ion-col>
+    </ion-row>
 
+    <div class="img_doctor">
+      <ion-avatar>
+        <img [src]="doctor.sex==1?'../../assets/imgs/25.png':'../../assets/imgs/27.png'">
+      </ion-avatar>
+    </div>
+  </ion-grid>
 </ion-content>
