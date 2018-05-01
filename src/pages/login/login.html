@@ -7,12 +7,14 @@
 
 <ion-content >
 
-  <ion-grid class="my_grid">
+  <ion-grid class="_grid">
+
     <ion-row>
       <div class="background_div">
         <h2 class="title_login" >移动病房APP</h2>
       </div>
     </ion-row>
+
     <ion-row>
       <!--用户登录表单-->
       <form (ngSubmit)="doLogin()" padding  class="form_login"  #loginForm="ngForm">
@@ -40,8 +42,10 @@
         </ion-item>
 
         <div class="link_a">
-          <a  (click)="forgetPassword()">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a  (click)="forgetpassword()">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <a  (click)="registerUser()" style="margin-left:50px;">没有账号，注册</a>
+
+
         </div>
 
         <div padding>

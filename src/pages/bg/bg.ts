@@ -21,5 +21,4 @@ export class BgPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad BgPage');
   }
-
 }

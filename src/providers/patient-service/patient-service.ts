@@ -16,54 +16,57 @@ export class PatientServiceProvider {
     console.log('Hello PatientServiceProvider Provider');
   }
 
-  //根据用户Id获取所关联的病人信息
+  /*根据用户Id获取所关联的病人信息*/
   public getPatientsByUserId(userId:number,callback:any){
     let urlMethod = "/peopleAction_getPatientsByUserId";
-    this.httpService.postSerializationPromise(urlMethod,{"userId":userId})
-      .then(res=>{
-        if(res.hasOwnProperty("patientList")){
-          callback(res);
-        }
-        else{
-          callback("获取用户失败");
-        }
-      },err=>{
-        callback("获取用户失败");
-      });
-  }
-
-  //根据病人的Id获取病人的住院记录
-  public  getHospitalizationBypatientId(patientId:number,callback:any){
-    let urlMethod="/hospitalizationAction_getHospitalizationByPatientId";
-    this.httpService.postSerializationPromise(urlMethod,{"patientId":patientId})
-      .then(
+    this.httpService.postSerializationObservable(urlMethod,{"userId":userId})
+      .subscribe(
         res=>{
-          if(res.hasOwnProperty("hospitalizationList")){
-            callback(res);
-          }
-          else {
-            callback("获取用户住院信息失败");
-          }
-        },err=>{
-          callback("获取用户住院信息失败");
-        }
-      );
+           callback(res);
+        },
+        err=>{
+           callback("获取用户失败");
+        });
   }
 
-  //根据病人获得监护人的信息
+
+
+ /*根据病人的Id获取病人的住院记录*/
+  public  getHospitalizationBypatientId(patientId:number,callback:any){
+    let urlMethod="/peopleAction_getHospitalizationByPatientId";
+    this.httpService.postSerializationObservable(urlMethod,{"patientId":patientId})
+      .subscribe(
+        res=>{
+            callback(res);
+          },
+        err=>{
+            callback("获取用户住院信息失败");
+        });
+  }
+
+ /*根据病人获得监护人的信息*/
   public getUserOfGuardianByPatientId(patientId:number,callback:any){
     let urlMethod ="/userAction_getUserOfGuardianByPatientId";
-    this.httpService.postSerializationPromise(urlMethod,{"patientId":patientId})
-      .then(
+    this.httpService.postSerializationObservable(urlMethod,{"patientId":patientId})
+      .subscribe(
         res=>{
-          if(res.hasOwnProperty("user")){
-            callback(res);
-          }
-          else {
-            callback("获取监护人信息失败");
-          }
-        },err=>{
-            callback("获取监护人信息失败");
+          callback(res);
+        },
+        err=>{
+          callback("获取病人的监护人错误");
+        });
+  }
+
+  /*根据病人的ID号，找到对应的住院信息，把相应的医生和护士的信息找出来*/
+  public  getDoctorAndNurseByPatientIds(patientIdds:any,callback:any){
+    let urlString = "/peopleAction_getDoctorAndNurseByPatientIds";
+    this.httpService.postSerializationObservable(urlString,{"patientIds":patientIdds})
+      .subscribe(
+        res=>{
+          callback(res);
+        },
+        err=>{
+          callback("获取医生和护士信息失败");
         }
       );
   }

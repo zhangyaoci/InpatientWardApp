@@ -35,17 +35,18 @@ export class PatientInfoPage {
 
     //获取住院记录
     this.patientService.getHospitalizationBypatientId(this.navParams.data["patientId"],data=>{
-      if(data.hasOwnProperty("hospitalizationList")){
-        this.hospitalizations=data["hospitalizationList"];
+      if(data.hasOwnProperty("success")){
+        this.hospitalizations=data["success"];
       }
       else{
         console.log(data);
       }});
 
+
     //获取监护人信息
     this.patientService.getUserOfGuardianByPatientId(this.navParams.data["patientId"],data=>{
-      if(data.hasOwnProperty("user")){
-        this.userOfGuardian=data["user"];
+      if(data.hasOwnProperty("success")){
+        this.userOfGuardian=data["success"];
       }else {
         console.log(data);
       }});

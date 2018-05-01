@@ -25,56 +25,42 @@ import {NurseInfoPage} from "../nurse-info/nurse-info";
 export class PatientsPage {
 
   people:string="patients";
-  patients:Patient[]=new Array();
-  doctors:Doctor[] =new Array();
-  nurses:Nurse[] = new Array();
-  doctorsId:any[] =new Array();
-  nursesId:any[] =new Array();
+
+  patients:Patient[] = new Array();
+  patientIds:any[]   = new Array();
+  doctors:Doctor[]   = new Array();
+  nurses:Nurse[]     = new Array();
 
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public patientService:PatientServiceProvider,
               public userService:UserServiceProvider) {
+
     this.patientService.getPatientsByUserId(this.userService.user["userId"],data=>{
-      if(data.hasOwnProperty("patientList")){
-        this.patients=data["patientList"];
-        //console.log("病人住院",this.patients);
+      if(data.hasOwnProperty("success")){
+        this.patients=data["success"];
         for(let patient_ of this.patients){
-          for(let hospitalization of patient_["hospitalizations"]){
-            let flag = true;
-            for(let doctorId of this.doctorsId){
-              if(hospitalization["doctor"].doctorId==doctorId){
-                flag=false;
-              }
-            }
-            if(flag){
-              this.doctors.push(hospitalization["doctor"]);
-              this.doctorsId.push(hospitalization["doctor"].doctorId);
-            }
-
-            let flag_nurse=true;
-            for(let nurseId of this.nursesId){
-              if(hospitalization["nurse"].nurseId==nurseId){
-                flag_nurse=false;
-              }
-            }
-            if(flag_nurse){
-              this.nurses.push(hospitalization["nurse"]);
-              this.nursesId.push(hospitalization["nurse"].nurseId);
-            }
-
-          }
+          this.patientIds.push(patient_["patientId"]);
         }
-
-        //console.log("医生",this.doctors);
-        //console.log("护士",this.nurses);
-
+        /*获取病人相应的护士和医生*/
+        this.patientService.getDoctorAndNurseByPatientIds(this.patientIds,data_=>{
+          if(data_.hasOwnProperty("successOfDoctor")){
+            this.doctors=data_["successOfDoctor"];
+            this.nurses=data_["successOfNurse"];
+          }
+          else {
+            console.log("错误信息",data_);
+          }
+        });
       }else{
         console.log("用户数据",data);
       }
     });
   }
+
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PatientsPage');

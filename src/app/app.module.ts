@@ -6,21 +6,19 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 
 
-//导入画图模块
+/*画图模块*/
 import { ChartsModule } from 'ng2-charts';
 
-//引入httpClient模块
+/*httpClient模块*/
 import { HttpClientModule } from '@angular/common/http';
 
-//引入组件模块
+/*组件模块*/
 import { ComponentsModule } from '../components/components.module';
 
 
-//映入根组件
+/*根组件*/
 import { MyApp } from './app.component';
-
-
-//引入页面
+/*页面*/
 import { TabsPage } from '../pages/tabs/tabs';
 import { MenusPage} from "../pages/menus/menus";
 import { InfoPage} from "../pages/info/info"
@@ -41,14 +39,12 @@ import { TemPage} from "../pages/tem/tem";
 
 
 
-//http数据请求服务
+/*http数据请求服务*/
 import { HttpServiceProvider } from '../providers/http-service/http-service';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PatientServiceProvider } from '../providers/patient-service/patient-service';
-import { DoctorServiceProvider } from '../providers/doctor-service/doctor-service';
-import { NurseServiceProvider } from '../providers/nurse-service/nurse-service';
-import { HospitalizationServiceProvider } from '../providers/hospitalization-service/hospitalization-service';
+import { InformationServiceProvider } from '../providers/information-service/information-service';
 
 
 
@@ -79,7 +75,7 @@ import { HospitalizationServiceProvider } from '../providers/hospitalization-ser
     HttpClientModule,
     ChartsModule,
     IonicModule.forRoot(MyApp,{
-      tabsHideOnSubPages: 'true', //隐藏全部子页面 tabs
+      tabsHideOnSubPages: 'true', /*隐藏全部子页面 tabs*/
       backButtonText: '返回' /*配置返回按钮*/
     })
   ],
@@ -112,9 +108,7 @@ import { HospitalizationServiceProvider } from '../providers/hospitalization-ser
     StorageServiceProvider,
     UserServiceProvider,
     PatientServiceProvider,
-    DoctorServiceProvider,
-    NurseServiceProvider,
-    HospitalizationServiceProvider
+    InformationServiceProvider
   ]
 })
 export class AppModule {}
