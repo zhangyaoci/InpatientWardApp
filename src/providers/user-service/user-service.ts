@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {User} from "../../model/user";
 import {HttpServiceProvider} from "../http-service/http-service";
+import {StorageServiceProvider} from "../storage-service/storage-service";
 
 /*
   Generated class for the UserServiceProvider provider.
@@ -12,68 +13,62 @@ import {HttpServiceProvider} from "../http-service/http-service";
 @Injectable()
 export class UserServiceProvider {
 
-  constructor(public http: HttpClient,public httpService :HttpServiceProvider) {
+  constructor(public http: HttpClient,
+              public httpService :HttpServiceProvider,
+              public storageService:StorageServiceProvider) {
     console.log('Hello UserServiceProvider Provider');
   }
 
 
-  //当前使用的用户保存信息
+  /*当前使用的用户保存信息*/
   public user:User;
 
-  //用户注册，调用回调函数
+  /*用户注册，调用回调函数*/
   public  register(user:User,callback:any){
       let urlMethod="/loginAction_register";
       this.httpService.postSerializationObservable(urlMethod,{user:user})
         .subscribe(
           res=>{
-            let resultData=res.hasOwnProperty("message")?res["message"]:"注册失败";
-            callback(resultData);
+            callback(res);
           },
           err=>{
-            let resultData=err.hasOwnProperty("message")?err["message"]:"注册失败";
-            callback(resultData);
+            callback("注册失败");
           });
   }
 
-  //用户登录,调用回调函数
+  /*用户登录,调用回调函数*/
   public  login(user:User,callback:any){
        let urlMethond = "/loginAction_login";
-
        this.httpService.postSerializationObservable(urlMethond,{user:user})
          .subscribe(
            res=>{
-               if(res.hasOwnProperty("user")){
-                 this.user=res["user"];
-                 callback(this.user);
-               }
-               else{
-                 let message = res.hasOwnProperty("message")?res["message"]:"登录失败";;
-                 callback(message);
-               }
+               if(res.hasOwnProperty("success")){
+                 this.user=res["success"];
+                 /*保存登录成功之后的用户*/
+                 this.storageService.write("userLocal",this.user);
+                }
+               callback(res);
            },
            err=>{
-               let message= err.hasOwnProperty("message")?err["message"]:"登录失败";
-               callback(message);
+               callback("登录失败");
            });
 
   }
 
-  //用户修改密码，
+  /*用户修改密码*/
   public  amendPassword(user:User,callback:any){
         let urlMethod="/loginAction_amendPassword";
         this.httpService.postSerializationObservable(urlMethod,{user:user})
           .subscribe(
             res=>{
-                let message = res.hasOwnProperty("message")?res["message"]:"密码修改失败";
-                callback(message);
+                callback(res);
             },
             err=>{
-              let message=err.hasOwnProperty("message")?err["message"]:"密码修改失败";
-              callback(message);
+              callback("密码修改失败");
             });
   }
 
-  //根据电话号码获取唯一用户
+  /*根据电话号码获取唯一用户*/
   public  getUserByPhone(phone:string,callback:any){
           let urlMethond="/userAction_getUserByPhone";
           this.httpService.postSerializationObservable(urlMethond,{"phone":phone})
@@ -100,12 +95,10 @@ export class UserServiceProvider {
           this.httpService.postSerializationObservable(urlMethod,{"user":user})
             .subscribe(
               res=>{
-                let message = res.hasOwnProperty("message")?res["message"]:"用户修改信息失败";
-                callback(message);
+                callback(res);
               },
                 err=>{
-                let message = err.hasOwnProperty("message")?err["message"]:"用户修改信息失败";
-                callback(message);
+                callback("用户信息修改失败");
               });
   }
 

@@ -36,6 +36,7 @@ import { BogPage} from "../pages/bog/bog";
 import { BpPage} from "../pages/bp/bp";
 import { HrPage} from "../pages/hr/hr";
 import { TemPage} from "../pages/tem/tem";
+import { NewInfoPage} from "../pages/new-info/new-info";
 
 
 
@@ -67,7 +68,8 @@ import { InformationServiceProvider } from '../providers/information-service/inf
     BgPage,
     BogPage,
     HrPage,
-    TemPage
+    TemPage,
+    NewInfoPage
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,8 @@ import { InformationServiceProvider } from '../providers/information-service/inf
     BgPage,
     BogPage,
     HrPage,
-    TemPage
+    TemPage,
+    NewInfoPage
   ],
   providers: [
     StatusBar,

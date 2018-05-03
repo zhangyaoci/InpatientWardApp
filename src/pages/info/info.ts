@@ -50,13 +50,13 @@ export class InfoPage implements OnInit{
   //修改用户基础信息
   editUser(){
      this.userService.updateUser(this.user,data=>{
-          if(data=="用户修改信息成功"){
+          if(data.hasOwnProperty("success")){
             //保持在userService storagerService的数据更新
             this.userService.user=this.user;
             this.storageService.write("userLocal",this.user);
           }
           else{
-            this.massage=data;
+            this.massage=data["error"]!=null?data["error"]:data;;
           }
      });
   }

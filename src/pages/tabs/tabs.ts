@@ -21,8 +21,7 @@ export class TabsPage {
   tab2Root = NewsPage;
   tab3Root = PatientsPage;
 
-  private badgeNumber:number=8;
-  private informations=new Array();
+  private badgeNumber={"number":0};/*表示没有被阅读的消息*/
 
   constructor(public navParams: NavParams,
               public storageService :StorageServiceProvider,
@@ -33,8 +32,7 @@ export class TabsPage {
       this.userService.user=this.storageService.read("userLocal");
       this.informationService.getInformation(this.userService.user["userId"],data=>{
         if(data.hasOwnProperty("success")){
-          this.informations=data["success"];
-          this.badgeNumber = this.informations.length;
+          this.badgeNumber = this.informationService.noRead;
         }
       });
     }

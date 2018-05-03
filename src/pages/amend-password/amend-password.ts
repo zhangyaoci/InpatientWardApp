@@ -33,16 +33,15 @@ export class AmendPasswordPage {
   user:User=new User();
   infoMessage:any;
 
-  //修改密码
+  /*用户修改密码*/
   amendPassword(){
-      this.userService.amendPassword(this.user,message=>{
-        if(message=="密码修改成功"){
-          this.storageService.remove("phone");
+      this.userService.amendPassword(this.user,data=>{
+        if(data.hasOwnProperty("success")){
           this.storageService.clear();
           this.app.getRootNav().setRoot(LoginPage);
         }
         else{
-          this.infoMessage=message;
+          this.infoMessage=data["error"]!=null?data["error"]:data;
         }
       });
   }

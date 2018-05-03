@@ -34,13 +34,15 @@ export class RegisterPage {
   user:User=new User();
   message;
   registerUser(){
-   this.userService.register(this.user,resultMessage=>{
-     if(resultMessage=="注册成功"){
+   this.userService.register(this.user,data=>{
+     if(data.hasOwnProperty("success")){
+       this.user["userId"]=data["userId"];
+       this.userService.user=this.user;
        this.storageService.write("userLocal",this.user);
        this.app.getRootNav().setRoot(TabsPage);
      }
      else{
-       this.message=resultMessage;
+       this.message=data["error"]!=null?data["error"]:data;
      }});
   }
 }

@@ -13,4 +13,40 @@
 
 <ion-content padding>
 
+  <ion-segment [(ngModel)]="informationOption" style="padding-bottom: 20px;">
+    <ion-segment-button value="sysInfo">
+      系统消息
+    </ion-segment-button>
+    <ion-segment-button value="doctorInfo" >
+      医嘱
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="informationOption">
+
+
+    <ion-list *ngSwitchCase="'sysInfo'" >
+      <ion-item *ngFor="let systemInformation of systemInformations"  (click)="readingSysInfo(systemInformation)">
+        <ion-thumbnail item-start>
+          <img [src]="systemInformation['patient']['sex']==1?'../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'">
+        </ion-thumbnail>
+
+        <div class="font_size">
+          <div>{{systemInformation["patient"]["relationShip"]}}</div>
+          <div>{{systemInformation["title"]}}</div>
+        </div>
+
+        <div item-end class="font_size">
+          <div>{{systemInformation["time"]}}</div>
+          <div style="padding-left: 10px;">
+            <ion-icon icon-end name="notifications" [color]="systemInformation['isRead']==0?'danger':'primary'"></ion-icon>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-list  *ngSwitchCase="'doctorInfo'">
+
+    </ion-list>
+  </div>
 </ion-content>

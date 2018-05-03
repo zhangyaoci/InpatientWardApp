@@ -56,17 +56,14 @@ export class LoginPage {
 
 
 
-
-
-  //用户进行登录验证
+  /*用户进行登录验证*/
   doLogin() {
-   this.userService.login(this.user,returnMessage=>{
-     if(returnMessage.hasOwnProperty("phone")){
-       this.storageService.write("userLocal",returnMessage);
+   this.userService.login(this.user,data=>{
+     if(data.hasOwnProperty("success")){
        this.app.getRootNav().setRoot(TabsPage);
      }
      else{
-       this.message=returnMessage;
+       this.message=data["error"]!=null?data["error"]:data;
      }});
   }
 }

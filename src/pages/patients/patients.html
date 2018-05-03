@@ -12,22 +12,21 @@
 
 
 <ion-content padding>
-  <div padding>
-    <ion-segment [(ngModel)]="people">
-      <ion-segment-button value="patients">
-        家人
-      </ion-segment-button>
-      <ion-segment-button value="doctors" >
-        医生
-      </ion-segment-button>
-      <ion-segment-button value="nurses"  >
-        护士
-      </ion-segment-button>
-    </ion-segment>
-  </div>
+
+  <ion-segment [(ngModel)]="people" style="padding-bottom: 20px;">
+    <ion-segment-button value="patients">
+      家人
+    </ion-segment-button>
+    <ion-segment-button value="doctors" >
+      医生
+    </ion-segment-button>
+    <ion-segment-button value="nurses"  >
+      护士
+    </ion-segment-button>
+  </ion-segment>
+
 
   <div [ngSwitch]="people">
-
 
 
     <ion-list *ngSwitchCase="'patients'" >
