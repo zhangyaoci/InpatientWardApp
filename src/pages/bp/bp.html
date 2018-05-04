@@ -13,7 +13,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-scroll  scrollX="true"  style="height: 115px; border:1px solid #ddd;border-style: none none solid none; ">
+
+    <div style="width:1000px;padding-top: 15px;padding-left: 15px;">
+
+      <div style="display:inline-block; margin-right: 25px;">
+        <button  style="border-radius: 35px;background-color: white;"  [class]="btnStyle[0]" (click)="getPatientInfo(0)">
+          <img style="display: inline-block;width: 60px;height: 60px; border-radius: 35px;"
+               src="../../assets/imgs/grandfather.png"></button>
+        <div style="font-size:14px;text-align: center; margin-top: 5px;">爷爷</div>
+      </div>
+
+      <div style="display:inline-block;margin-right: 25px;">
+        <button  style="border-radius: 35px;background-color: white;"  [class]="btnStyle[1]" (click)="getPatientInfo(1)">
+          <img style="display: inline-block;width: 60px;height: 60px; border-radius: 35px;"
+               src="../../assets/imgs/grandma.png"></button>
+        <div style="font-size:14px;text-align: center; margin-top: 5px;">奶奶</div>
+      </div>
+
+    </div>
+
+
+  </ion-scroll>
+
   <div style="width:75%;">
     <canvas  #chartBar ></canvas>
   </div>

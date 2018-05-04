@@ -98,6 +98,6 @@ export class NewsPage{
     else {
       this.navCtrl.push(NewInfoPage,information);
     }
-
   }
+
 }

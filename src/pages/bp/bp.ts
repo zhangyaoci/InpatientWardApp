@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import Chart from 'chart.js';
+import {UserServiceProvider} from "../../providers/user-service/user-service";
+import {PatientServiceProvider} from "../../providers/patient-service/patient-service";
 /**
  * Generated class for the BpPage page.
  *
@@ -18,7 +20,31 @@ export class BpPage implements AfterViewInit{
 
   @ViewChild('chartBar') chartBar: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private patients:any;
+
+  /*控制当前按钮的颜色*/
+  public btnStyle:string[]=new Array(2);
+  /*当前点击的按钮是那个*/
+  public btnIsVisited:number=0;
+
+  /*测试阶段用用户ID号为72*/
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public userService: UserServiceProvider,
+              public patientService:PatientServiceProvider) {
+
+    /*首先获取当前用户关注的病人*/
+    this.patientService.getPatientsByUserId(72,data=>{
+      if(data.hasOwnProperty("success")){
+        this.patients = data["success"];
+        console.log("获取当前用户关注病人信息",this.patients);
+      }
+      else{
+        console.log("获取当前用户关注病人信息失败");
+      }
+    });
+
+    this.btnStyle[0]="btn_visited";
   }
 
   ionViewDidLoad() {
@@ -98,4 +124,11 @@ export class BpPage implements AfterViewInit{
     var myLine = new Chart(this.chartBar.nativeElement.getContext("2d"), config);
   }
 
+  /*获取点击病人的生理数据*/
+  public getPatientInfo(num:number){
+   this.btnStyle[num]="btn_visited";
+   this.btnStyle[this.btnIsVisited]="";
+   this.btnIsVisited=num;
+    console.log("当前状态", this.btnStyle);
+  }
 }
