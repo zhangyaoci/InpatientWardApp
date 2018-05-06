@@ -21,11 +21,10 @@ export class BpPage implements AfterViewInit{
   @ViewChild('chartBar') chartBar: ElementRef;
 
   private patients:any;
-
   /*控制当前按钮的颜色*/
-  public btnStyle:string[]=new Array(2);
+  public btnStyle:string[]=new Array(1);
   /*当前点击的按钮是那个*/
-  public btnIsVisited:number=0;
+  public btnIsVisited:number;
 
   /*测试阶段用用户ID号为72*/
   constructor(public navCtrl: NavController,
@@ -37,6 +36,10 @@ export class BpPage implements AfterViewInit{
     this.patientService.getPatientsByUserId(72,data=>{
       if(data.hasOwnProperty("success")){
         this.patients = data["success"];
+        this.btnStyle=new Array(this.patients.length);
+        /*默认是访问第一个数据*/
+        this.btnStyle[0]="btn_visited";
+        this.btnIsVisited=0;
         console.log("获取当前用户关注病人信息",this.patients);
       }
       else{
@@ -44,7 +47,7 @@ export class BpPage implements AfterViewInit{
       }
     });
 
-    this.btnStyle[0]="btn_visited";
+
   }
 
   ionViewDidLoad() {

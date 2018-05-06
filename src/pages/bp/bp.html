@@ -15,30 +15,56 @@
 
 <ion-content>
 
-  <ion-scroll  scrollX="true"  style="height: 115px; border:1px solid #ddd;border-style: none none solid none; ">
-
-    <div style="width:1000px;padding-top: 15px;padding-left: 15px;">
-
-      <div style="display:inline-block; margin-right: 25px;">
-        <button  style="border-radius: 35px;background-color: white;"  [class]="btnStyle[0]" (click)="getPatientInfo(0)">
-          <img style="display: inline-block;width: 60px;height: 60px; border-radius: 35px;"
-               src="../../assets/imgs/grandfather.png"></button>
-        <div style="font-size:14px;text-align: center; margin-top: 5px;">爷爷</div>
+  <!--选择栏-->
+  <ion-scroll scrollX="true" class="scroll_title">
+    <div class="div_title">
+      <div style="" class="choose_item" *ngFor="let patient of patients;let i= index;">
+        <button [class]="btnStyle[i]" (click)="getPatientInfo(i)">
+          <img class="img_item" [src]="patient['sex']==1?
+          '../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'"></button>
+        <div class="relation_div">{{patient["relationShip"]}}</div>
       </div>
+    </div>
+  </ion-scroll>
 
-      <div style="display:inline-block;margin-right: 25px;">
-        <button  style="border-radius: 35px;background-color: white;"  [class]="btnStyle[1]" (click)="getPatientInfo(1)">
-          <img style="display: inline-block;width: 60px;height: 60px; border-radius: 35px;"
-               src="../../assets/imgs/grandma.png"></button>
-        <div style="font-size:14px;text-align: center; margin-top: 5px;">奶奶</div>
-      </div>
+  <!--条件筛选栏-->
+  <div style="padding-left: 15px; line-height: 51px;">
 
+
+   <ion-icon  name="calendar" style="padding-left: 5px;padding-right: 5px;" color="danger"></ion-icon>
+
+    <div style="display: inline-block">
+      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px">
+        <ion-datetime displayFormat="MM/DD/YYYY"
+                      style="border: 1px solid #ddd;font-size: 8px;
+                      padding-left:5px;height: 35px; border-top-left-radius: 5px;
+                      font-family:SansSerif;
+                      border-bottom-left-radius: 5px;"
+                      placeholder="开始时间" ></ion-datetime>
+      </ion-item>
     </div>
 
 
-  </ion-scroll>
+    <div style="display: inline-block">
+      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px;">
+        <ion-datetime displayFormat="MM/DD/YYYY"
+                      style="border: 1px solid #ddd; font-size: 8px;
+                      font-family: SansSerif;
+                      padding-left:5px;height: 35px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;"
+                      placeholder="结束时间"></ion-datetime>
+      </ion-item>
+    </div>
+
+
+    <div style="display: inline-block">
+      <button style="display: inline-block" style="border-top-left-radius: 5px;border-bottom-left-radius: 5px;width: 50px;height: 35px;background-color: white;border: 1px solid #ddd;">曲线</button>
+      <button style="display: inline-block" style="width: 50px;height: 35px;background-color: white;border: 1px solid #ddd;">统计</button>
+      <button style="display: inline-block" style="border-top-right-radius: 5px;border-bottom-right-radius: 5px;width: 50px;height: 35px;background-color: white;border: 1px solid #ddd;">列表</button>
+    </div>
+
+  </div>
 
   <div style="width:75%;">
-    <canvas  #chartBar ></canvas>
+    <canvas #chartBar></canvas>
   </div>
 </ion-content>
