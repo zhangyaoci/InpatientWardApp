@@ -36,4 +36,22 @@ page-bp {
     text-align: center;
     margin-top: 5px;
   }
+  .div_list_button {
+    display: inline-block;
+  }
+  .div_list_button button {
+    display: inline-block;
+    width: 50px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #ddd;
+  }
+  .button_right {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .button_left {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
 }

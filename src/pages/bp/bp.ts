@@ -25,6 +25,8 @@ export class BpPage implements AfterViewInit{
   public btnStyle:string[]=new Array(1);
   /*当前点击的按钮是那个*/
   public btnIsVisited:number;
+  /*默认展示曲线图*/
+  public chooseType:String='curve';
 
   /*测试阶段用用户ID号为72*/
   constructor(public navCtrl: NavController,
@@ -133,5 +135,10 @@ export class BpPage implements AfterViewInit{
    this.btnStyle[this.btnIsVisited]="";
    this.btnIsVisited=num;
     console.log("当前状态", this.btnStyle);
+  }
+
+  /*改变选中的条件*/
+  public changeChooseType(type:string) {
+    this.chooseType=type;
   }
 }

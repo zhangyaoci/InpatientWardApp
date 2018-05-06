@@ -46,6 +46,7 @@ import { StorageServiceProvider } from '../providers/storage-service/storage-ser
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PatientServiceProvider } from '../providers/patient-service/patient-service';
 import { InformationServiceProvider } from '../providers/information-service/information-service';
+import { PhysiologyServiceProvider } from '../providers/physiology-service/physiology-service';
 
 
 
@@ -111,7 +112,8 @@ import { InformationServiceProvider } from '../providers/information-service/inf
     StorageServiceProvider,
     UserServiceProvider,
     PatientServiceProvider,
-    InformationServiceProvider
+    InformationServiceProvider,
+    PhysiologyServiceProvider
   ]
 })
 export class AppModule {}

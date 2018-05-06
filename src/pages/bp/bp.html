@@ -56,15 +56,33 @@
     </div>
 
 
-    <div style="display: inline-block">
-      <button style="display: inline-block" style="border-top-left-radius: 5px;border-bottom-left-radius: 5px;width: 50px;height: 35px;background-color: white;border: 1px solid #ddd;">曲线</button>
-      <button style="display: inline-block" style="width: 50px;height: 35px;background-color: white;border: 1px solid #ddd;">统计</button>
-      <button style="display: inline-block" style="border-top-right-radius: 5px;border-bottom-right-radius: 5px;width: 50px;height: 35px;background-color: white;border: 1px solid #ddd;">列表</button>
+    <div  class="div_list_button" style="display: inline-block">
+      <button class="button_left" (click)="changeChooseType('curve')">曲线</button>
+      <button (click)="changeChooseType('statistics')">统计</button>
+      <button class="button_right" (click)="changeChooseType('list')">列表</button>
     </div>
 
   </div>
 
-  <div style="width:75%;">
-    <canvas #chartBar></canvas>
-  </div>
+
+
+  <ion-scroll scrollY="true" [ngSwitch]="chooseType" style="margin: 12px;height: 380px;">
+     <div *ngSwitchCase="'curve'">
+       <div style="width:75%;">
+         <canvas #chartBar></canvas>
+       </div>
+     </div>
+
+    <div *ngSwitchCase="'statistics'">
+      2222
+    </div>
+    <div *ngSwitchCase="'list'">
+        333333333
+    </div>
+
+  </ion-scroll>
+
+
+
+
 </ion-content>
