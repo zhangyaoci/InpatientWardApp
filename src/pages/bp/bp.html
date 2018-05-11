@@ -35,7 +35,7 @@
 
     <div style="display: inline-block">
       <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px">
-        <ion-datetime displayFormat="MM/DD/YYYY"
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
                       style="border: 1px solid #ddd;font-size: 8px;
                       padding-left:5px;height: 35px; border-top-left-radius: 5px;
                       font-family:SansSerif;
@@ -47,7 +47,7 @@
 
     <div style="display: inline-block">
       <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px;">
-        <ion-datetime displayFormat="MM/DD/YYYY"
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD"  [(ngModel)]="endTime"
                       style="border: 1px solid #ddd; font-size: 8px;
                       font-family: SansSerif;
                       padding-left:5px;height: 35px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;"
@@ -73,15 +73,13 @@
      </div>
 
     <div [hidden]="chooseType!='statistics'" >
-      2222
+      统计报表
     </div>
     <div [hidden]="chooseType!='list'">
-        333333333
+        <ion-item style="font-size: 14px;" *ngFor="let bloodPressureHtml of bloodPressures">
+         血压值 :{{bloodPressureHtml.value}}
+        </ion-item>
     </div>
-
   </ion-scroll>
-
-
-
 
 </ion-content>

@@ -13,6 +13,69 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <!--选择栏-->
+  <ion-scroll scrollX="true" class="scroll_title">
+    <div class="div_title">
+      <div style="" class="choose_item" *ngFor="let patient of patients;let i= index;">
+        <button [class]="btnStyle[i]" (click)="getPatientInfo(i)">
+          <img class="img_item" [src]="patient['sex']==1?
+          '../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'"></button>
+        <div class="relation_div">{{patient["relationShip"]}}</div>
+      </div>
+    </div>
+  </ion-scroll>
+
+  <!--条件筛选栏-->
+  <div style="padding-left: 15px; line-height: 51px;">
+
+
+    <ion-icon  name="calendar" style="padding-left: 5px;padding-right: 5px;" color="danger"></ion-icon>
+
+    <div style="display: inline-block">
+      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px">
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
+                      style="border: 1px solid #ddd;font-size: 8px;
+                      padding-left:5px;height: 35px; border-top-left-radius: 5px;
+                      font-family:SansSerif;
+                      border-bottom-left-radius: 5px;"
+                      placeholder="开始时间" ></ion-datetime>
+      </ion-item>
+    </div>
+
+
+    <div style="display: inline-block">
+      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px;">
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD"  [(ngModel)]="endTime"
+                      style="border: 1px solid #ddd; font-size: 8px;
+                      font-family: SansSerif;
+                      padding-left:5px;height: 35px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;"
+                      placeholder="结束时间"></ion-datetime>
+      </ion-item>
+    </div>
+
+
+    <div  class="div_list_button" style="display: inline-block">
+      <button class="button_left" (click)="changeChooseType('curve')">曲线</button>
+      <button (click)="changeChooseType('statistics')">统计</button>
+      <button class="button_right" (click)="changeChooseType('list')">列表</button>
+    </div>
+
+  </div>
+
+
+
+  <ion-scroll scrollY="true"  style="margin: 12px;height: 380px;">
+    <div [hidden]="chooseType!='curve'">
+      1111
+    </div>
+
+    <div [hidden]="chooseType!='statistics'" >
+      222
+    </div>
+    <div [hidden]="chooseType!='list'">
+      3333
+    </div>
+  </ion-scroll>
 
 </ion-content>

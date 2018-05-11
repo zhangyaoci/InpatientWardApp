@@ -1,3 +1,52 @@
 page-bg {
-
+  .btn_visited {
+    border: 2px dashed red;
+  }
+  .scroll_title {
+    height: 115px;
+    border: 1px solid #ddd;
+    border-style: none none solid none;
+  }
+  .div_title {
+    width: 1000px;
+    padding-top: 15px;
+    padding-left: 38px;
+  }
+  .choose_item {
+    display: inline-block;
+    margin-right: 40px;
+  }
+  .choose_item button {
+    border-radius: 35px;
+    background-color: white;
+  }
+  .img_item {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+  }
+  .relation_div {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
+  }
+  .div_list_button {
+    display: inline-block;
+  }
+  .div_list_button button {
+    display: inline-block;
+    width: 50px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #ddd;
+  }
+  .button_right {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .button_left {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
 }
