@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
-import Chart from 'chart.js';
 import {InformationServiceProvider} from "../../providers/information-service/information-service";
 import {NewInfoPage} from "../new-info/new-info";
 /**

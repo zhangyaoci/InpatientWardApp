@@ -66,17 +66,16 @@
 
 
 
-  <ion-scroll scrollY="true" [ngSwitch]="chooseType" style="margin: 12px;height: 380px;">
-     <div *ngSwitchCase="'curve'">
-       <div style="width:75%;">
-         <canvas #chartBar></canvas>
+  <ion-scroll scrollY="true"  style="margin: 12px;height: 380px;">
+     <div [hidden]="chooseType!='curve'">
+       <div  style="height:380px;" id="container">
        </div>
      </div>
 
-    <div *ngSwitchCase="'statistics'">
+    <div [hidden]="chooseType!='statistics'" >
       2222
     </div>
-    <div *ngSwitchCase="'list'">
+    <div [hidden]="chooseType!='list'">
         333333333
     </div>
 

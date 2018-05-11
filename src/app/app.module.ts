@@ -6,9 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 
 
-/*画图模块*/
-import { ChartsModule } from 'ng2-charts';
-
 /*httpClient模块*/
 import { HttpClientModule } from '@angular/common/http';
 
@@ -76,7 +73,6 @@ import { PhysiologyServiceProvider } from '../providers/physiology-service/physi
     BrowserModule,
     ComponentsModule,
     HttpClientModule,
-    ChartsModule,
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', /*隐藏全部子页面 tabs*/
       backButtonText: '返回' /*配置返回按钮*/

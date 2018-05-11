@@ -1,9 +1,4 @@
 page-bp {
-  #canvas {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-  }
   .btn_visited {
     border: 2px dashed red;
   }
@@ -15,11 +10,11 @@ page-bp {
   .div_title {
     width: 1000px;
     padding-top: 15px;
-    padding-left: 15px;
+    padding-left: 38px;
   }
   .choose_item {
     display: inline-block;
-    margin-right: 25px;
+    margin-right: 40px;
   }
   .choose_item button {
     border-radius: 35px;
