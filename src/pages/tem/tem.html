@@ -11,11 +11,9 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>体温</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -34,29 +32,29 @@
   </ion-scroll>
 
   <!--条件筛选栏-->
-  <div style="padding-left: 15px; line-height: 51px;">
+  <div class="select_head">
 
-
-    <ion-icon  name="calendar" style="padding-left: 5px;padding-right: 5px;" color="danger"></ion-icon>
+    <ion-icon  name="calendar" class="select-icon" color="danger"></ion-icon>
 
     <div style="display: inline-block">
-      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px">
-        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
+      <ion-item no-lines style="padding: 0px;width: 80px">
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="inputStartTime"
                       style="border: 1px solid #ddd;font-size: 8px;
-                      padding-left:5px;height: 35px; border-top-left-radius: 5px;
+                      padding-left:5px; border-top-left-radius: 5px;
                       font-family:SansSerif;
                       border-bottom-left-radius: 5px;"
                       placeholder="开始时间" ></ion-datetime>
       </ion-item>
     </div>
 
+    <div style="display: inline-block;position: relative;left: -4px;">~</div>
 
     <div style="display: inline-block">
       <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px;">
-        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD"  [(ngModel)]="endTime"
+        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD"  [(ngModel)]="inputEndTime"
                       style="border: 1px solid #ddd; font-size: 8px;
                       font-family: SansSerif;
-                      padding-left:5px;height: 35px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;"
+                      padding-left:5px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;"
                       placeholder="结束时间"></ion-datetime>
       </ion-item>
     </div>
@@ -74,7 +72,8 @@
 
   <ion-scroll scrollY="true"  style="margin: 12px;height: 380px;">
     <div [hidden]="chooseType!='curve'">
-     1111
+      <div  style="height:380px;" id="container">
+      </div>
     </div>
 
     <div [hidden]="chooseType!='statistics'" >

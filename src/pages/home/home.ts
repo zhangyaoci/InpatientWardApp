@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, ForwardRefFn, OnInit, ViewChild} from '@angular/core';
-import {MenuController, ModalController, NavController} from 'ionic-angular';
+import {App, MenuController, ModalController, NavController} from 'ionic-angular';
 import {BgPage} from "../bg/bg";
 import {BogPage} from "../bog/bog";
 import {BpPage} from "../bp/bp";
@@ -13,7 +13,8 @@ import {TemPage} from "../tem/tem";
 export class HomePage {
 
 
-  constructor(public navCtrl: NavController,
+  constructor(public app :App,
+              public navCtrl: NavController,
               public modalCtrl: ModalController,
               public elementRef: ElementRef,
               public menu: MenuController) {
@@ -25,18 +26,23 @@ export class HomePage {
   }
 
   toBG(){
-    this.navCtrl.push(BgPage);
+    this.app.getRootNav().push(BgPage);
+    /*this.navCtrl.push(BgPage);*/
   }
   toBOG(){
-    this.navCtrl.push(BogPage);
+    this.app.getRootNav().push(BogPage);
+    /*this.navCtrl.push(BogPage);*/
   }
   toBP(){
-    this.navCtrl.push(BpPage);
+    this.app.getRootNav().push(BpPage);
+   /* this.navCtrl.push(BpPage);*/
   }
   toHR(){
-    this.navCtrl.push(HrPage);
+    this.app.getRootNav().push(HrPage);
+    /*this.navCtrl.push(HrPage);*/
   }
   toTem(){
-    this.navCtrl.push(TemPage);
+    this.app.getRootNav().push(TemPage);
+   /* this.navCtrl.push(TemPage);*/
   }
 }

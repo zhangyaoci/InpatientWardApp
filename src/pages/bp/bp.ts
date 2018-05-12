@@ -187,6 +187,13 @@ export class BpPage{
 
   /*画图*/
   public  drawGraph(): void {
+
+    Highcharts.setOptions({
+      lang: {
+        noData: '暂无数据'
+      }
+    });
+
     var chart = Highcharts.chart('container', {
       title: {
         text: '病人的血压值'
@@ -250,6 +257,13 @@ export class BpPage{
             }
           }
         }]
+      }
+      ,noData: {
+        style: {
+          fontWeight: 'bold',
+          fontSize: '15px',
+          color: '#303030'
+        }
       }
     });
   }
