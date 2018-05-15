@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
 import {InformationServiceProvider} from "../../providers/information-service/information-service";
 import {NewInfoPage} from "../new-info/new-info";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
 /**
  * Generated class for the NewsPage page.
  *
@@ -25,7 +26,9 @@ export class NewsPage{
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public informationService:InformationServiceProvider) {
+              public informationService:InformationServiceProvider,
+              public userService:UserServiceProvider) {
+    /*在进入该页面之前，就已经在tabPage中获取了消息的数据*/
     this.informations = this.informationService.informations;
     for(let information of this.informations){
 
@@ -86,7 +89,7 @@ export class NewsPage{
   public readingSysInfo(information:any){
     if(information["isRead"]==0){
       this.informationService.updateReadingState(
-        this.informationService.userId,information["informationId"],data=>{
+        this.userService.user["userId"],information["informationId"],data=>{
           if(data.hasOwnProperty("success")){
             information["isRead"]=1;
             this.navCtrl.push(NewInfoPage,information);

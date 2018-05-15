@@ -1,23 +1,28 @@
 page-info {
-  .uers_info{
+  .info_wrap {
+    height: 100%;
+    margin: 0px;
+  }
+  .info_head {
     width: 100%;
-    height: 234px;
-    background:url("../../assets/imgs/backgroundMenu.jpg");
+    height: 40%;
+    background: url("../../assets/imgs/menu_background.png");
     background-size: 100% auto;
     background-repeat: no-repeat;
     text-align: center;
   }
-  .uers_info img{
+  .info_head img {
     height: 100px;
     width: 100px;
-    border-radius:60px;
-    margin-top: 50px;
+    border-radius: 60px;
+    margin-top: 20%;
   }
-  .uers_info div{
-    margin-top: 16px;
+  .info_head div {
+    margin-top: 3%;
     color: white;
   }
-  .back_icon{
+
+  .back_icon {
     position: absolute;
     left: 17px;
     top: 10px;
@@ -26,13 +31,30 @@ page-info {
     color: white;
     height: 35px;
   }
-  .text_user input{
+
+
+
+  .info_content input {
     text-align: right;
   }
-  .button_itme{
+
+  .info_content_1 {
     text-align: right;
   }
-  .button_itme button{
+  .info_content_1 button {
     width: 65px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  .info_content_head{
+    padding-left: 50%
+  }
+
+
+  .info_bottom {
+    margin-right: 5px;
+    color: red;
+    float: left;
   }
 }

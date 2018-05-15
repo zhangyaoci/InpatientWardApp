@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component } from '@angular/core';
 import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {User} from "../../model/user";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
@@ -36,13 +36,10 @@ export class RegisterPage {
   registerUser(){
    this.userService.register(this.user,data=>{
      if(data.hasOwnProperty("success")){
-       this.user["userId"]=data["userId"];
-       this.userService.user=this.user;
-       this.storageService.write("userLocal",this.user);
        this.app.getRootNav().setRoot(TabsPage);
      }
      else{
-       this.message=data["error"]!=null?data["error"]:data;
+       this.message=data["error"];
      }});
   }
 }

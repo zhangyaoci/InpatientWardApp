@@ -44,6 +44,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PatientServiceProvider } from '../providers/patient-service/patient-service';
 import { InformationServiceProvider } from '../providers/information-service/information-service';
 import { PhysiologyServiceProvider } from '../providers/physiology-service/physiology-service';
+import { UtilServiceProvider } from '../providers/util-service/util-service';
 
 
 
@@ -109,7 +110,8 @@ import { PhysiologyServiceProvider } from '../providers/physiology-service/physi
     UserServiceProvider,
     PatientServiceProvider,
     InformationServiceProvider,
-    PhysiologyServiceProvider
+    PhysiologyServiceProvider,
+    UtilServiceProvider
   ]
 })
 export class AppModule {}

@@ -7,46 +7,50 @@
 
 <ion-content >
 
-  <ion-grid class="_grid">
+  <ion-grid class="login_wrap">
 
-    <ion-row>
-      <div class="background_div">
-        <h2 class="title_login" >移动病房APP</h2>
+    <ion-row class="login_head">
+      <div>
+        <h2>移动病房APP</h2>
       </div>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="login_content">
       <!--用户登录表单-->
-      <form (ngSubmit)="doLogin()" padding  class="form_login"  #loginForm="ngForm">
+      <form (ngSubmit)="doLogin()" padding  #loginForm="ngForm">
 
         <ion-item>
           <ion-icon name="person" item-start></ion-icon>
-          <ion-input type="text"  required name="userId"
-                     minlength="11" maxlength="11"
+          <ion-input type="text"
+                     required
+                     name="userId"
+                     minlength="11"
+                     maxlength="11"
                      pattern="^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$"
                      [(ngModel)]="user.phone"
-                     placeholder="请输入手机号码" ></ion-input>
+                     placeholder="登录手机号码" ></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-icon name="lock" item-start></ion-icon>
           <ion-input type="password"
                      minlength="6"
-                     required name="password"
+                     required
+                     name="password"
                      [(ngModel)]="user.password"
                      placeholder="请输入密码"></ion-input>
         </ion-item>
 
-        <ion-item no-lines="true" class="alert_message" *ngIf="message!=null">
+        <ion-item no-lines class="login_content_3" *ngIf="message!=null">
           <div>{{message}}</div>
         </ion-item>
 
-        <div class="link_a">
-          <a  (click)="forgetPassword()">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a  (click)="registerUser()" style="margin-left:50px;">没有账号，注册</a>
-
-
+        <div class="login_content_4">
+          <a  (click)="forgetPassword()" class="login_content_4_1">忘记密码</a>
+          <a  (click)="registerUser()" class="login_content_4_2">没有账号，注册</a>
         </div>
+
+
 
         <div padding>
           <button type="submit" ion-button  full  round color="danger"

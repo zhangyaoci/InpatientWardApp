@@ -3,6 +3,7 @@
     <button ion-button menuToggle start>
       <ion-icon name="menu"></ion-icon>
     </button>
+
     <ion-title>主页</ion-title>
 
     <ion-buttons end>
@@ -17,11 +18,12 @@
 
 <ion-content >
 
-  <ion-list>
-    <div class="home_img">
+  <ion-list class="home_wrap">
+
+    <div class="home_head">
     </div>
 
-    <ion-grid class="grid_home">
+    <ion-grid class="home_content">
       <ion-row >
         <ion-col col-4 (click)="toBP()">
           <img  src="../../assets/imgs/bloodPressure.png">

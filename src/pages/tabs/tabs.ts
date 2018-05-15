@@ -35,6 +35,13 @@ export class TabsPage {
           this.badgeNumber = this.informationService.noRead;
         }
       });
+    }else{
+      /*在不为空的时候也要获取消息*/
+      this.informationService.getInformation(this.userService.user["userId"],data=>{
+        if(data.hasOwnProperty("success")){
+          this.badgeNumber = this.informationService.noRead;
+        }
+      });
     }
 
 

@@ -5,12 +5,11 @@ import { App } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 
 
-import {HttpServiceProvider} from "../../providers/http-service/http-service";
-import {User} from "../../model/user";
-import {AmendPasswordPage} from "../amend-password/amend-password";
-import {RegisterPage} from "../register/register"
-import {UserServiceProvider} from "../../providers/user-service/user-service";
-import {StorageServiceProvider} from "../../providers/storage-service/storage-service";
+import { HttpServiceProvider} from "../../providers/http-service/http-service";
+import { User} from "../../model/user";
+import { AmendPasswordPage} from "../amend-password/amend-password";
+import { RegisterPage} from "../register/register"
+import { UserServiceProvider} from "../../providers/user-service/user-service";
 
 
 /**
@@ -28,16 +27,16 @@ import {StorageServiceProvider} from "../../providers/storage-service/storage-se
 })
 export class LoginPage {
 
-
-  user:User=new User();
-  message:any;
+  private user:User=new User();
+  private message:any;
 
   /*注入Service服务*/
   constructor(private app: App,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public userService:UserServiceProvider,
-              public storageService:StorageServiceProvider) {
+              public userService:UserServiceProvider) {
+    console.log("登陆页面初始化");
+
   }
 
   ionViewDidLoad() {
@@ -48,22 +47,20 @@ export class LoginPage {
   forgetPassword(){
     this.navCtrl.push(AmendPasswordPage);
   }
-
   //新用户注册
   registerUser(){
     this.navCtrl.push(RegisterPage);
   }
 
 
-
   /*用户进行登录验证*/
-  doLogin() {
+  private doLogin() {
    this.userService.login(this.user,data=>{
      if(data.hasOwnProperty("success")){
        this.app.getRootNav().setRoot(TabsPage);
      }
      else{
-       this.message=data["error"]!=null?data["error"]:data;
+       this.message=data["error"];
      }});
   }
 }

@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 /*添加下面的选择栏*/
 import { TabsPage } from '../pages/tabs/tabs';
-import {LoginPage} from "../pages/login/login";
+import { LoginPage} from "../pages/login/login";
 
 /*引入服务*/
 import {StorageServiceProvider}  from '../providers/storage-service/storage-service'

@@ -1,7 +1,14 @@
 page-menus {
-  .menu_item_picture{
+  .menu_head {
     height: 40%;
-    background-image:url("../../assets/imgs/backgroundMenu.jpg");
+    background-image: url("../../assets/imgs/menu_background.png");
     color: white;
+  }
+  .menu_head img {
+    height: 90px;
+    width: 90px;
+  }
+  .menu_head_2_2{
+    margin-top: 8px;
   }
 }

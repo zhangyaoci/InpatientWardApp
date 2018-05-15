@@ -6,23 +6,29 @@
 -->
 
 <ion-content>
-  <ion-list>
-    <div class="uers_info">
-      <button ion-button icon-left clear class="back_icon" (click)="back_to()">
+  <ion-list class="info_wrap">
+    <div class="info_head">
+      <button ion-button
+              icon-left
+              clear
+              class="back_icon"
+              (click)="back_to()">
         <ion-icon name="arrow-round-back"></ion-icon>
       </button>
-      <img  src="../../assets/imgs/user.png">
+      <img  [src]="user.picturePath">
       <div>{{user.name}}</div>
     </div>
 
     <form (submit)="editUser()">
       <ion-item>
-        <ion-label>头像</ion-label>
-        <ion-input  class="text_user"></ion-input>
+        <ion-label >头像</ion-label>
+        <ion-avatar item-end  class="info_content_head" (click)="getPicture()">
+          <img [src]='user.picturePath'>
+        </ion-avatar>
       </ion-item>
       <ion-item>
         <ion-label>名字</ion-label>
-        <ion-input [(ngModel)]="user.name"  name="name"  class="text_user"></ion-input>
+        <ion-input [(ngModel)]="user.name"  name="name"  class="info_content"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>性别</ion-label>
@@ -33,17 +39,17 @@
       </ion-item>
       <ion-item>
         <ion-label>电话号码</ion-label>
-        <ion-input [(ngModel)]="user.phone" name="phone" class="text_user"></ion-input>
+        <ion-input [(ngModel)]="user.phone" name="phone" class="info_content"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>现住地址</ion-label>
-        <ion-input [(ngModel)]="user.address" name="address" class="text_user"></ion-input>
+        <ion-input [(ngModel)]="user.address" name="address" class="info_content"></ion-input>
       </ion-item>
 
-      <ion-item no-lines  class="button_itme">
-        <p style="margin-right: 5px; color:red;">{{message}}</p>
-        <button style="height: 42px;font-size: 20px;"  ion-button  type="submit" color="primary">确认</button>
-        <button style="height: 42px;font-size: 20px;"  ion-button (click)="back_to()"  color="primary">返回</button>
+      <ion-item no-lines  class="info_content_1">
+        <p  class="info_bottom">{{massage}}</p>
+        <button  ion-button  type="submit" color="primary">确认</button>
+        <button  ion-button (click)="back_to()"  color="primary">返回</button>
       </ion-item>
     </form>
 

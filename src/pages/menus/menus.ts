@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {App, IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
 import {HomePage}  from '../home/home';
 import {InfoPage} from  "../info/info";
-import {AmendPasswordPage} from "../amend-password/amend-password"
-import {NewsPage} from "../news/news";
-import {PatientsPage} from "../patients/patients";
+import {AmendPasswordPage} from "../amend-password/amend-password";
 import {StorageServiceProvider} from "../../providers/storage-service/storage-service";
 import {LoginPage} from "../login/login";
 import {User} from "../../model/user";
@@ -26,9 +24,9 @@ export class MenusPage {
 
   @ViewChild(Nav) nav: Nav;
 
-  user:User=new User();
-  rootPage: any=HomePage;
-  pages: Array<{title: string, component: any}>;
+  private user:User=new User();
+  private rootPage: any=HomePage;
+  private pages: Array<{title: string, component: any}>;
 
 
   constructor(public app :App,
@@ -46,7 +44,10 @@ export class MenusPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenusPage');
   }
-
+  ionViewWillEnter(){
+    //console.log('每次进入时候调用');
+    this.user=this.userService.user;
+  }
 
   //打开一个页面
   openPage(page) {
@@ -61,6 +62,5 @@ export class MenusPage {
     this.storageService.clear();
     this.app.getRootNav().setRoot(LoginPage);
   }
-
 
 }

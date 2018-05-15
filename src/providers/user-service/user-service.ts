@@ -1,9 +1,8 @@
-
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {User} from "../../model/user";
-import {HttpServiceProvider} from "../http-service/http-service";
-import {StorageServiceProvider} from "../storage-service/storage-service";
+import { User} from "../../model/user";
+import { HttpServiceProvider} from "../http-service/http-service";
+import { StorageServiceProvider} from "../storage-service/storage-service";
+import { UtilServiceProvider} from "../util-service/util-service";
 
 /*
   Generated class for the UserServiceProvider provider.
@@ -13,33 +12,52 @@ import {StorageServiceProvider} from "../storage-service/storage-service";
 @Injectable()
 export class UserServiceProvider {
 
-  constructor(public http: HttpClient,
-              public httpService :HttpServiceProvider,
-              public storageService:StorageServiceProvider) {
+  /*当前使用的用户保存信息*/
+  public user:User;
+
+
+  constructor(public httpService :HttpServiceProvider,
+              public storageService:StorageServiceProvider,
+              public utilService:UtilServiceProvider) {
     console.log('Hello UserServiceProvider Provider');
   }
 
 
-  /*当前使用的用户保存信息*/
-  public user:User;
+
 
   /*用户注册，调用回调函数*/
   public  register(user:User,callback:any){
+
+      let phone = user["phone"];
+      let password=this.utilService.encodePassword(user["password"]);
+
+      this.utilService.encodePassword(user["password"]);
       let urlMethod="/loginAction_register";
-      this.httpService.postSerializationObservable(urlMethod,{user:user})
+      this.httpService.postSerializationObservable(urlMethod,{'phone':phone,'password':password})
         .subscribe(
           res=>{
+            if(res.hasOwnProperty("success")){
+              this.storageService.clear();
+              this.user = res["success"];
+              this.storageService.write("userLocal",this.user);
+            }
             callback(res);
           },
           err=>{
-            callback("注册失败");
+            callback({"error":"注册失败"});
           });
   }
 
+
   /*用户登录,调用回调函数*/
   public  login(user:User,callback:any){
-       let urlMethond = "/loginAction_login";
-       this.httpService.postSerializationObservable(urlMethond,{user:user})
+
+       let phone = user["phone"];
+       let password=this.utilService.encodePassword(user["password"]);
+
+
+       let urlString = "/loginAction_login";
+       this.httpService.postSerializationObservable(urlString,{"phone":phone,"password":password})
          .subscribe(
            res=>{
                if(res.hasOwnProperty("success")){
@@ -50,23 +68,35 @@ export class UserServiceProvider {
                callback(res);
            },
            err=>{
-               callback("登录失败");
+               callback({"error":"登录失败"});
            });
 
   }
 
   /*用户修改密码*/
   public  amendPassword(user:User,callback:any){
+
+        let phone = user["phone"];
+        let password=this.utilService.encodePassword(user["password"]);
+
         let urlMethod="/loginAction_amendPassword";
-        this.httpService.postSerializationObservable(urlMethod,{user:user})
+        this.httpService.postSerializationObservable(urlMethod,{'phone':phone,'password':password})
           .subscribe(
             res=>{
                 callback(res);
             },
             err=>{
-              callback("密码修改失败");
+              callback({"error":"密码修改失败"});
             });
   }
+
+
+
+
+
+
+
+
 
   /*根据电话号码获取唯一用户*/
   public  getUserByPhone(phone:string,callback:any){
@@ -89,12 +119,17 @@ export class UserServiceProvider {
                });
   }
 
+
   //修改用户基础信息
   public updateUser(user:User,callback){
           let urlMethod ="/userAction_editUser";
           this.httpService.postSerializationObservable(urlMethod,{"user":user})
             .subscribe(
               res=>{
+                if(res.hasOwnProperty("success")){
+                  this.user = res["success"];
+                  this.storageService.write("userLocal",this.user);
+                }
                 callback(res);
               },
                 err=>{

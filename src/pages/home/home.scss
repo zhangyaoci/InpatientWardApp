@@ -1,27 +1,32 @@
 page-home {
-  .home_img{
+  .home_wrap{
+    height: 100%;
+  }
+  .home_head{
     width: 100%;
-    height: 192px;
+    height: 33%;
     padding: 0px;
     background:url("../../assets/imgs/home.jpg");
-    background-size: 100% auto;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
   }
-  .grid_home{
+
+
+  .home_content{
     padding: 0px;
   }
-  .grid_home ion-col{
+  .home_content ion-col{
     height: 125px;
     text-align: center;
     border: 1px solid #ddd;
   }
-  .grid_home ion-col img{
+  .home_content ion-col img{
     height: 70px;
     width: 70px;
     border-radius:60px;
     margin-top: 10px;
   }
-  .grid_home ion-col div{
+  .home_content ion-col div{
     margin-top: 5px;
   }
 }

@@ -10,6 +10,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StorageServiceProvider {
 
+
+  /*本地存储信息*/
+
+
   constructor(public http: HttpClient) {
     console.log('Hello StorageServiceProvider Provider');
   }
@@ -27,7 +31,6 @@ export class StorageServiceProvider {
     if (value && value != "undefined" && value != "null") {
       return <T>JSON.parse(value);
     }
-
     return null;
   }
 

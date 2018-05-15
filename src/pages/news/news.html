@@ -28,7 +28,7 @@
     <ion-list *ngSwitchCase="'sysInfo'" >
       <ion-item *ngFor="let systemInformation of systemInformations"  (click)="readingSysInfo(systemInformation)">
         <ion-thumbnail item-start>
-          <img [src]="systemInformation['patient']['sex']==1?'../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'">
+          <img [src]="systemInformation['patient']['picturePath']">
         </ion-thumbnail>
 
         <div class="font_size">
@@ -48,7 +48,7 @@
     <ion-list  *ngSwitchCase="'doctorInfo'" >
       <ion-item *ngFor="let doctorInformation of doctorInformaions"  (click)="readingSysInfo(doctorInformation)">
         <ion-thumbnail item-start>
-          <img [src]="doctorInformation['patient']['sex']==1?'../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'">
+          <img [src]="doctorInformation['patient']['picturePath']">
         </ion-thumbnail>
 
         <div class="font_size">

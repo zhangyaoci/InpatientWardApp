@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ForwardRefFn, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {App, MenuController, ModalController, NavController} from 'ionic-angular';
 import {BgPage} from "../bg/bg";
 import {BogPage} from "../bog/bog";
@@ -15,8 +15,6 @@ export class HomePage {
 
   constructor(public app :App,
               public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              public elementRef: ElementRef,
               public menu: MenuController) {
      menu.enable(true);
   }
