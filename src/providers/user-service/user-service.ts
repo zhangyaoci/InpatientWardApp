@@ -89,6 +89,9 @@ export class UserServiceProvider {
                   this.informationService.updateIsPopToZeroForInformationUser(this.user["userId"],
                     data=>{
                       if(data.hasOwnProperty("success")){
+                        /*清空内存*/
+                        this.informationService.destroyData();
+                        this.destroyData();
                         this.storageService.clear();
                       }
                     });
@@ -99,13 +102,6 @@ export class UserServiceProvider {
               callback({"error":"密码修改失败"});
             });
   }
-
-
-
-
-
-
-
 
 
   /*根据电话号码获取唯一用户*/
@@ -145,6 +141,11 @@ export class UserServiceProvider {
                 err=>{
                 callback("用户信息修改失败");
               });
+  }
+
+  /*销毁所有服务里面数据*/
+  public destroyData(){
+    this.user=null;
   }
 
 }

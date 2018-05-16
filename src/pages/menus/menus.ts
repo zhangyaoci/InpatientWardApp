@@ -65,6 +65,8 @@ export class MenusPage {
       data=>{
         if(data.hasOwnProperty("success")){
           this.storageService.clear();
+          this.userService.destroyData();
+          this.informationService.destroyData();
           this.app.getRootNav().setRoot(LoginPage);
         }
       });

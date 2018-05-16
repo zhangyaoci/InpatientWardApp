@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {InformationServiceProvider} from "../information-service/information-service";
-import {UserServiceProvider} from "../user-service/user-service";
+import {IonicApp} from "ionic-angular";
+
 
 /*
   Generated class for the StorageServiceProvider provider.
@@ -38,7 +37,7 @@ export class StorageServiceProvider {
     localStorage.removeItem(key);
   }
 
-  /*在用户修改密码 、注册用户、退出 先要把当前用户所对应的消息都视为没有没有被拉取状态*/
+  /*在用户修改密码 、退出 先要把当前用户所对应的消息都视为没有没有被拉取状态*/
   public clear() {
     localStorage.clear();
   }

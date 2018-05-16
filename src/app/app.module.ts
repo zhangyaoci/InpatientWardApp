@@ -112,6 +112,7 @@ import { UtilServiceProvider } from '../providers/util-service/util-service';
     InformationServiceProvider,
     PhysiologyServiceProvider,
     UtilServiceProvider
+
   ]
 })
 export class AppModule {}
