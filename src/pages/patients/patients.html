@@ -33,7 +33,7 @@
 
       <ion-item *ngFor="let patient of patients"  (click)="getInfoPatient(patient)">
         <ion-thumbnail item-start>
-          <img [src]="patient.sex==1?'../../assets/imgs/grandfather.png':'../../assets/imgs/grandma.png'">
+          <img [src]="patient['picturePath']">
         </ion-thumbnail>
 
         <div class="font_size">
@@ -58,7 +58,7 @@
     <ion-list *ngSwitchCase="'doctors'"  >
       <ion-item *ngFor="let doctor of doctors" (click)="toDoctor(doctor)">
         <ion-thumbnail item-start>
-          <img [src]="doctor.sex==1?'../../assets/imgs/25.png':'../../assets/imgs/27.png'">
+          <img [src]="doctor['picturePath']">
         </ion-thumbnail>
 
         <div class="font_size">
@@ -79,7 +79,7 @@
     <ion-list *ngSwitchCase="'nurses'">
       <ion-item *ngFor="let nurse of nurses" (click)="toNurse(nurse)">
         <ion-thumbnail item-start>
-          <img [src]="nurse.sex==1?'../../assets/imgs/25.png':'../../assets/imgs/27.png'">
+          <img [src]="nurse['picturePath']">
         </ion-thumbnail>
 
         <div class="font_size">

@@ -22,8 +22,7 @@ export class AmendPasswordPage {
   constructor(public app:App,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public userService:UserServiceProvider,
-              public storageService:StorageServiceProvider) {
+              public userService:UserServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -37,7 +36,6 @@ export class AmendPasswordPage {
   amendPassword(){
       this.userService.amendPassword(this.user,data=>{
         if(data.hasOwnProperty("success")){
-          this.storageService.clear();
           this.app.getRootNav().setRoot(LoginPage);
         }
         else{

@@ -34,12 +34,18 @@ export class TabsPage {
         if(data.hasOwnProperty("success")){
           this.badgeNumber = this.informationService.noRead;
         }
+        else{
+          console.log(data["error"]);
+        }
       });
     }else{
       /*在不为空的时候也要获取消息*/
       this.informationService.getInformation(this.userService.user["userId"],data=>{
         if(data.hasOwnProperty("success")){
           this.badgeNumber = this.informationService.noRead;
+        }
+        else {
+          console.log(data["error"]);
         }
       });
     }

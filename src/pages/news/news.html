@@ -13,7 +13,7 @@
 
 <ion-content padding>
 
-  <ion-segment [(ngModel)]="informationOption" style="padding-bottom: 20px;">
+  <ion-segment [(ngModel)]="informationOption" class="news_head">
     <ion-segment-button value="sysInfo">
       系统消息
     </ion-segment-button>
@@ -22,8 +22,10 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div [ngSwitch]="informationOption">
 
+
+
+  <div [ngSwitch]="informationOption">
 
     <ion-list *ngSwitchCase="'sysInfo'" >
       <ion-item *ngFor="let systemInformation of systemInformations"  (click)="readingSysInfo(systemInformation)">
@@ -33,12 +35,12 @@
 
         <div class="font_size">
           <div>{{systemInformation["patient"]["relationShip"]}}</div>
-          <div>{{systemInformation["title"]}}</div>
+          <div  class="new_content_2">{{systemInformation["title"]}}</div>
         </div>
 
-        <div item-end class="font_size">
-          <div>{{systemInformation["time"]}}</div>
-          <div style="padding-left: 10px;">
+        <div item-end   class="new_content_right font_size">
+          <div>{{systemInformation["timeTransform"]}}</div>
+          <div class="new_content_3">
             <ion-icon icon-end name="notifications" [color]="systemInformation['isRead']==0?'danger':'primary'"></ion-icon>
           </div>
         </div>
@@ -53,16 +55,17 @@
 
         <div class="font_size">
           <div>{{doctorInformation["patient"]["relationShip"]}}</div>
-          <div>{{doctorInformation["title"]}}</div>
+          <div  class="new_content_2">{{doctorInformation["title"]}}</div>
         </div>
 
-        <div item-end class="font_size">
-          <div>{{doctorInformation["time"]}}</div>
-          <div style="padding-left: 10px;">
+        <div item-end   class="new_content_right font_size">
+          <div>{{doctorInformation["timeTransform"]}}</div>
+          <div  class="new_content_3">
             <ion-icon icon-end name="notifications" [color]="doctorInformation['isRead']==0?'danger':'primary'"></ion-icon>
           </div>
         </div>
       </ion-item>
     </ion-list>
+
   </div>
 </ion-content>

@@ -3,6 +3,7 @@ import { User} from "../../model/user";
 import { HttpServiceProvider} from "../http-service/http-service";
 import { StorageServiceProvider} from "../storage-service/storage-service";
 import { UtilServiceProvider} from "../util-service/util-service";
+import {InformationServiceProvider} from "../information-service/information-service";
 
 /*
   Generated class for the UserServiceProvider provider.
@@ -18,7 +19,8 @@ export class UserServiceProvider {
 
   constructor(public httpService :HttpServiceProvider,
               public storageService:StorageServiceProvider,
-              public utilService:UtilServiceProvider) {
+              public utilService:UtilServiceProvider,
+              public informationService:InformationServiceProvider) {
     console.log('Hello UserServiceProvider Provider');
   }
 
@@ -37,7 +39,6 @@ export class UserServiceProvider {
         .subscribe(
           res=>{
             if(res.hasOwnProperty("success")){
-              this.storageService.clear();
               this.user = res["success"];
               this.storageService.write("userLocal",this.user);
             }
@@ -83,6 +84,15 @@ export class UserServiceProvider {
         this.httpService.postSerializationObservable(urlMethod,{'phone':phone,'password':password})
           .subscribe(
             res=>{
+                if(res.hasOwnProperty("success")){
+                  /*在**之后，删除以前用信息*/
+                  this.informationService.updateIsPopToZeroForInformationUser(this.user["userId"],
+                    data=>{
+                      if(data.hasOwnProperty("success")){
+                        this.storageService.clear();
+                      }
+                    });
+                }
                 callback(res);
             },
             err=>{

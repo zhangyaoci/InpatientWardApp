@@ -17,12 +17,14 @@ import {UserServiceProvider} from "../../providers/user-service/user-service";
 })
 export class NewsPage{
 
-  /*保存当前的消息*/
-  private informations=new Array();
-  public  informationOption="sysInfo";
+  private  informationOption="sysInfo";
 
-  private systemInformations=new Array();
-  private doctorInformaions =new Array();
+
+
+  /*保存当前的消息*/
+  private informations=[];
+  private systemInformations=[];
+  private doctorInformaions =[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -33,9 +35,10 @@ export class NewsPage{
     for(let information of this.informations){
 
       /*改变时间的显示格式*/
-      information["time"] = this.timeDifferenceForNow(information["time"])
-      information["isRead"]=0;
+      information["timeTransform"] = this.timeDifferenceForNow(information["time"])
+      /*information["isRead"]=0;*/
 
+      /*区分是系统消息，还是医嘱*/
       if(information["doctor"]==null){
         this.systemInformations.push(information);
       }
@@ -56,10 +59,8 @@ export class NewsPage{
   public timeDifferenceForNow(time:any){
     let timeOfNow = new Date();
     let timeOfInformation = new Date(time);
-
     //console.log("时间格式化",timeOfInformation);
-
-   // console.log("时间差",Math.abs(timeOfNow.getTime()-timeOfInformation.getTime()));
+    // console.log("时间差",Math.abs(timeOfNow.getTime()-timeOfInformation.getTime()));
 
     let timeDifference = Math.abs(timeOfNow.getTime()-timeOfInformation.getTime());
     let difference:any ;
@@ -79,9 +80,7 @@ export class NewsPage{
     else {
       difference = Math.ceil(timeDifference/(3600000*24*365))+"年";
     }
-
     return difference;
-
   }
 
 
@@ -92,6 +91,8 @@ export class NewsPage{
         this.userService.user["userId"],information["informationId"],data=>{
           if(data.hasOwnProperty("success")){
             information["isRead"]=1;
+            /*及时更新到本地数据库*/
+            this.informationService.updateInformationToStorage();
             this.navCtrl.push(NewInfoPage,information);
           }
           console.log(data["errror"]);

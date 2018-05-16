@@ -7,6 +7,7 @@ import {StorageServiceProvider} from "../../providers/storage-service/storage-se
 import {LoginPage} from "../login/login";
 import {User} from "../../model/user";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
+import {InformationServiceProvider} from "../../providers/information-service/information-service";
 
 /**
  * Generated class for the MenusPage page.
@@ -33,7 +34,8 @@ export class MenusPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public storageService :StorageServiceProvider,
-              public userService:UserServiceProvider) {
+              public userService:UserServiceProvider,
+              public informationService:InformationServiceProvider) {
     this.user=this.userService.user;
     this.pages = [
       { title: '用户基本信息', component: InfoPage },
@@ -58,9 +60,15 @@ export class MenusPage {
 
   //退出
   exit(){
-    this.storageService.remove("userLocal");
-    this.storageService.clear();
-    this.app.getRootNav().setRoot(LoginPage);
+    /*在**之后，删除以前用信息*/
+    this.informationService.updateIsPopToZeroForInformationUser(this.user["userId"],
+      data=>{
+        if(data.hasOwnProperty("success")){
+          this.storageService.clear();
+          this.app.getRootNav().setRoot(LoginPage);
+        }
+      });
+
   }
 
 }
