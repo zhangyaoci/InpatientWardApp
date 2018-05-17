@@ -4,5 +4,11 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+    },
+  "proxies": [
+    {
+      "path": "/inpatientWardAppServer",
+      "proxyUrl": "http://192.168.43.11:8080/inpatientWardAppServer"
+    }
+  ]
 }
