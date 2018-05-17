@@ -37,6 +37,7 @@ export class PatientsPage {
               public patientService:PatientServiceProvider,
               public userService:UserServiceProvider) {
 
+    /*根据用户ID，获取病人相应信息*/
     this.patientService.getPatientsByUserId(this.userService.user["userId"],data=>{
       if(data.hasOwnProperty("success")){
         this.patients=data["success"];

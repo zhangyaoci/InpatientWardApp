@@ -1,43 +1,55 @@
 page-bp {
+
+  /*头部选择框*/
   .btn_visited {
     border: 2px dashed red;
   }
-  .scroll_title {
+  .bp_head_1 {
     height: 115px;
     border: 1px solid #ddd;
     border-style: none none solid none;
   }
-  .div_title {
+  .bp_head_2 {
     width: 1000px;
     padding-top: 15px;
     padding-left: 38px;
   }
-  .choose_item {
+
+  .bp_head_2_1 {
     display: inline-block;
     margin-right: 40px;
+    height: 92px;
+    width: 76px;
   }
-  .choose_item button {
+  .bp_head_2_1 button {
     border-radius: 35px;
     background-color: white;
   }
-  .img_item {
+  .bp_head_2_1_1 {
     display: inline-block;
     width: 60px;
     height: 60px;
     border-radius: 35px;
   }
-  .relation_div {
+  .bp_head_2_1_2 {
     font-size: 14px;
     text-align: center;
     margin-top: 5px;
   }
-  .div_list_button {
+
+  /*条件筛选框*/
+
+  .bp_head_content {
+    text-align: center;
+    line-height: 55px;
+  }
+  .bp_head_content_1 {
     display: inline-block;
   }
-  .div_list_button button {
+  .bp_head_content_1 button {
     display: inline-block;
-    width: 50px;
-    height: 35px;
+    width: 80px;
+    height: 41px;
     background-color: white;
     border: 1px solid #ddd;
   }
@@ -49,4 +61,7 @@ page-bp {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
+
+
+
 }

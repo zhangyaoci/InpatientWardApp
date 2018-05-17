@@ -56,7 +56,7 @@ export class BpPage{
     this.initialTimeInput();
 
     /*首先获取当前用户关注的病人*/
-    this.patientService.getPatientsByUserId(72,data=>{
+    this.patientService.getPatientsByUserId(this.userService.user['userId'],data=>{
       if(data.hasOwnProperty("success")){
         this.patients = data["success"];
         this.btnStyle=new Array(this.patients.length);

@@ -25,7 +25,7 @@ export class PatientServiceProvider {
            callback(res);
         },
         err=>{
-           callback("获取用户失败");
+           callback({"error":"获取用户失败"});
         });
   }
 
@@ -40,7 +40,7 @@ export class PatientServiceProvider {
             callback(res);
           },
         err=>{
-            callback("获取用户住院信息失败");
+            callback({"error":"获取用户住院信息失败"});
         });
   }
 
@@ -53,20 +53,20 @@ export class PatientServiceProvider {
           callback(res);
         },
         err=>{
-          callback("获取病人的监护人错误");
+          callback({"error":"获取病人的监护人错误"});
         });
   }
 
   /*根据病人的ID号，找到对应的住院信息，把相应的医生和护士的信息找出来*/
-  public  getDoctorAndNurseByPatientIds(patientIdds:any,callback:any){
+  public  getDoctorAndNurseByPatientIds(patientIds:any,callback:any){
     let urlString = "/peopleAction_getDoctorAndNurseByPatientIds";
-    this.httpService.postSerializationObservable(urlString,{"patientIds":patientIdds})
+    this.httpService.postSerializationObservable(urlString,{"patientIds":patientIds})
       .subscribe(
         res=>{
           callback(res);
         },
         err=>{
-          callback("获取医生和护士信息失败");
+          callback({"error":"获取医生和护士信息失败"});
         }
       );
   }

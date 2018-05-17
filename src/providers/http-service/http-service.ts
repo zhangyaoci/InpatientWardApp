@@ -25,8 +25,8 @@ export class HttpServiceProvider {
     })
   };
 
- /* //访问的服务器路径
-  httpURL="http://localhost:8080/inpatientWardAppServer";*/
+  //访问的服务器路径
+  httpURL="http://192.168.43.11:8080/inpatientWardAppServer";
 
   constructor(public http: HttpClient) {
     console.log('Hello HttpServiceProvider Provider');
@@ -35,7 +35,7 @@ export class HttpServiceProvider {
 
   /*post请求返回一个observable对象*/
   public postSerializationObservable(urlMethod,data):Observable<object>{
-    return this.http.post( 'inpatientWardAppServer' + urlMethod + '',data, this.httpOptions);
+    return this.http.post( this.httpURL + urlMethod + '',data, this.httpOptions);
   }
 
 

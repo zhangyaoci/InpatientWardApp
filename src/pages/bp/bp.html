@@ -16,70 +16,139 @@
 <ion-content>
 
   <!--选择栏-->
-  <ion-scroll scrollX="true" class="scroll_title">
-    <div class="div_title">
-      <div style="" class="choose_item" *ngFor="let patient of patients;let i= index;">
+  <ion-scroll scrollX="true" class="bp_head_1">
+    <div class="bp_head_2">
+      <div class="bp_head_2_1" *ngFor="let patient of patients;let i= index;">
         <button [class]="btnStyle[i]" (click)="getPatientInfo(i)">
-          <img class="img_item" [src]="patient['picturePath']"></button>
-        <div class="relation_div">{{patient["relationShip"]}}</div>
+          <img class="bp_head_2_1_1" [src]="patient['picturePath']"></button>
+        <div class="bp_head_2_1_2">{{patient["relationShip"]}}</div>
       </div>
     </div>
   </ion-scroll>
 
+
   <!--条件筛选栏-->
-  <div style="padding-left: 2px; line-height: 51px;">
-
-
-   <ion-icon  name="calendar" style="padding-left: 5px;padding-right: 5px;" color="danger"></ion-icon>
-
-    <div style="display: inline-block">
-      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px">
-        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
-                      style="border: 1px solid #ddd;font-size: 8px;
-                      padding-left:5px;height: 35px; border-top-left-radius: 5px;
-                      font-family:SansSerif;
-                      border-bottom-left-radius: 5px;"
-                      placeholder="开始时间" ></ion-datetime>
-      </ion-item>
-    </div>
-
-    <div style="display: inline-block;position: relative;left: -4px;">~</div>
-
-    <div style="display: inline-block">
-      <ion-item no-lines style="padding: 0px;margin: 0px; width: 80px;">
-        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD"  [(ngModel)]="endTime"
-                      style="border: 1px solid #ddd; font-size: 8px;
-                      font-family: SansSerif;
-                      padding-left:5px;height: 35px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;"
-                      placeholder="结束时间"></ion-datetime>
-      </ion-item>
-    </div>
-
-
-    <div  class="div_list_button" style="display: inline-block">
+  <div class="bp_head_content">
+    <div class="bp_head_content_1">
       <button class="button_left" (click)="changeChooseType('curve')">曲线</button>
       <button (click)="changeChooseType('statistics')">统计</button>
       <button class="button_right" (click)="changeChooseType('list')">列表</button>
     </div>
+  </div>
 
+
+  <div [hidden]="chooseType!='curve'" style="height: 72%">
+    <!--日期筛选-->
+    <div>
+      <div style="display:inline-block; vertical-align: middle;margin-left: 2%;">
+        <img src="../../assets/icon/dateIcon.png" style="height: 35px;width: 35px;">
+      </div>
+      <div style="display: inline-block">
+        <ion-item no-lines style="width: 150px;">
+          <ion-datetime icon-start displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
+                        style="
+                    border: 1px solid #ddd;
+                    border-radius:5px;font-size: 14px;"
+                        placeholder="开始时间"></ion-datetime>
+
+        </ion-item>
+      </div>
+
+    </div>
+
+    <ion-scroll scrollY="true" style="height: 88%;">
+      <div id="container">
+      </div>
+    </ion-scroll>
   </div>
 
 
 
-  <ion-scroll scrollY="true"  style="margin: 12px;height: 380px;">
-     <div [hidden]="chooseType!='curve'">
-       <div  style="height:380px;" id="container">
-       </div>
-     </div>
 
-    <div [hidden]="chooseType!='statistics'" >
-      统计报表
-    </div>
-    <div [hidden]="chooseType!='list'">
-        <ion-item style="font-size: 14px;" *ngFor="let bloodPressureHtml of bloodPressures">
-         血压值 :{{bloodPressureHtml.value}}
+
+
+
+  <div [hidden]="chooseType!='statistics'" style="height: 72%">
+    <!--内容筛选条件-->
+    <div>
+      <div style="display:inline-block; vertical-align: middle;margin-left: 2%;">
+        <img src="../../assets/icon/dateIcon.png" style="height: 35px;width: 35px;">
+      </div>
+
+      <div style="display: inline-block">
+        <ion-item no-lines style="width: 135px;">
+          <ion-datetime icon-start displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
+                        style="
+                    border: 1px solid #ddd;
+                    border-radius:5px;font-size: 14px;"
+                        placeholder="开始时间"></ion-datetime>
+
         </ion-item>
+      </div>
+
+      <div style="display: inline-block">~</div>
+
+      <div style="display: inline-block">
+        <ion-item no-lines style="width: 135px;">
+          <ion-datetime icon-start displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="endTime"
+                        style="
+                    border: 1px solid #ddd;
+                    border-radius:5px;font-size: 14px;"
+                        placeholder="开始时间"></ion-datetime>
+
+        </ion-item>
+      </div>
     </div>
-  </ion-scroll>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div [hidden]="chooseType!='list'" style="height: 72%">
+    <!--内容筛选条件-->
+    <div>
+      <div style="display:inline-block; vertical-align: middle;margin-left: 2%;">
+        <img src="../../assets/icon/dateIcon.png" style="height: 35px;width: 35px;">
+      </div>
+
+      <div style="display: inline-block">
+        <ion-item no-lines style="width: 135px;">
+          <ion-datetime icon-start displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="startTime"
+                        style="
+                    border: 1px solid #ddd;
+                    border-radius:5px;font-size: 14px;"
+                        placeholder="开始时间"></ion-datetime>
+
+        </ion-item>
+      </div>
+
+      <div style="display: inline-block">~</div>
+
+      <div style="display: inline-block">
+        <ion-item no-lines style="width: 135px;">
+          <ion-datetime icon-start displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" [(ngModel)]="endTime"
+                        style="
+                    border: 1px solid #ddd;
+                    border-radius:5px;font-size: 14px;"
+                        placeholder="开始时间"></ion-datetime>
+
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-scroll scrollY="true" style="height: 88%;">
+      <ion-item style="font-size: 14px;" *ngFor="let bloodPressureHtml of bloodPressures">
+        血压值 :{{bloodPressureHtml.value}}
+      </ion-item>
+    </ion-scroll>
+  </div>
+
 
 </ion-content>
