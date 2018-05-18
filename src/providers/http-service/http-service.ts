@@ -38,7 +38,7 @@ export class HttpServiceProvider {
 
   /*post请求返回一个observable对象*/
   public postSerializationObservable(urlMethod,data):Observable<object>{
-    return this.http.post( "http://192.168.43.11:8080/inpatientWardAppServer" + urlMethod + '',data, this.httpOptions);
+    return this.http.post( "inpatientWardAppServer" + urlMethod + '',data, this.httpOptions);
   }
 
 

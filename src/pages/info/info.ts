@@ -59,43 +59,43 @@ export class InfoPage {
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/1.png',
+          value:'./assets/imgs/1.png',
           label:"头像1"
         },
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/2.png',
+          value:'./assets/imgs/2.png',
           label:"头像2"
         },
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/3.png',
+          value:'./assets/imgs/3.png',
           label:"头像3"
         },
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/4.png',
+          value:'./assets/imgs/4.png',
           label:"头像4"
         },
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/5.png',
+          value:'./assets/imgs/5.png',
           label:"头像5"
         },
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/6.png',
+          value:'./assets/imgs/6.png',
           label:"头像6"
         },
         {
           name: 'picture',
           type:'radio',
-          value:'../../assets/imgs/7.png',
+          value:'./assets/imgs/7.png',
           label:"头像7"
         },
       ],
