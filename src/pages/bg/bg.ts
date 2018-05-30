@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {PhysiologyServiceProvider} from "../../providers/physiology-service/physiology-service";
-import {UserServiceProvider} from "../../providers/user-service/user-service";
-import {PatientServiceProvider} from "../../providers/patient-service/patient-service";
+import { PhysiologyServiceProvider} from "../../providers/physiology-service/physiology-service";
+import { UserServiceProvider} from "../../providers/user-service/user-service";
+import { PatientServiceProvider} from "../../providers/patient-service/patient-service";
 
 /**
  * Generated class for the BgPage page.

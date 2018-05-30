@@ -5,7 +5,7 @@ import {PatientServiceProvider} from "../../providers/patient-service/patient-se
 import {PhysiologyServiceProvider} from "../../providers/physiology-service/physiology-service";
 
 import Highcharts from "highcharts";
-
+import HighchartsNoData from 'highcharts-no-data-to-display';
 /**
  * Generated class for the BpPage page.
  *
@@ -24,6 +24,7 @@ export class BpPage{
 
   @ViewChild('chartBar') chartBar: ElementRef;
 
+  /*根据服务存储病人列表*/
   private patients:any;
   /*控制当前按钮的颜色*/
   public btnStyle:string[]=new Array(1);
@@ -36,12 +37,17 @@ export class BpPage{
   /*时间标签*/
   public timeLabel= new Array();
   /*血压值中的具体数据*/
-  public bloodPressureValues = new Array();
+  public bloodPressureValues_1 = new Array();
+  public bloodPressureValues_0 = new Array();
 
-  /*开始时间*/
+  /*曲线的开始时间*/
+  private curve_startTime:any;
+
+  /*开始时间\统计列表时间*/
   public startTime:any;
-  /*结束时间*/
+  /*结束时间\统计列表时间*/
   public endTime :any;
+
 
 
 
@@ -55,6 +61,8 @@ export class BpPage{
     /*初始化开始时间和结束时间*/
     this.initialTimeInput();
 
+
+
     /*首先获取当前用户关注的病人*/
     this.patientService.getPatientsByUserId(this.userService.user['userId'],data=>{
       if(data.hasOwnProperty("success")){
@@ -64,8 +72,9 @@ export class BpPage{
         this.btnStyle[0]="btn_visited";
         this.btnIsVisited=0;
         /*病人的基本数据传递过来之后，显示第一病人今天的数据*/
-        this.getBloodPressureDataOfToday(this.patients[0]["patientId"]);
-        //console.log("获取当前用户关注病人信息",this.patients);
+        let _startTime=new Date(this.startTime);
+        let _endTime = new Date(_startTime.getTime()+1000*60*60*24);
+        this.getBloodPressureDateOfDuringTime(this.patients[0]["patientId"],_startTime,_endTime,'curveType');
       }
       else{
         console.log("获取当前用户关注病人信息失败");
@@ -83,85 +92,35 @@ export class BpPage{
    this.btnStyle[num]="btn_visited";
    this.btnStyle[this.btnIsVisited]="";
    this.btnIsVisited=num;
-   // console.log("当前状态", this.btnStyle);
-    this.getBloodPressureDataOfToday(this.patients[num]["patientId"]);
+   let _startTime=new Date(this.startTime);
+   let _endTime = new Date(_startTime.getTime()+1000*60*60*24);
+   this.getBloodPressureDateOfDuringTime(this.patients[0]["patientId"],_startTime,_endTime,'curveType');
   }
+
 
   /*改变选中的条件(曲线、统计、列表) ，然后获取病人ID号，开始时间和结束时间得到病人在该段时间内的血压值*/
   public changeChooseType(type:string) {
     this.chooseType=type;
-
     if(type=="curve"){
-      let _startTime=new Date(this.startTime);
-      _startTime.setHours(0);
-      console.log("开始时间格式化",_startTime);
-      let _endTime = new Date(this.endTime);
-      _endTime.setHours(0);
-      console.log("结束时间格式化",_endTime);
-
-      //console.log("开始时间",this.startTime);
-      //console.log("结束时间",this.endTime);
-      /*获取该时间段的血压值*/
-      this.getBloodPressureDateOfDuringTime(this.patients[this.btnIsVisited]["patientId"],_startTime,_endTime);
+      let _startTime=new Date(this.curve_startTime);
+      let _endTime = new Date(_startTime.getTime()+1000*60*60*24);
+      this.getBloodPressureDateOfDuringTime(this.patients[this.btnIsVisited]["patientId"],_startTime,_endTime,'curveType');
     }
-
-
-
-
-
+    if(type=='statistics'){
+      let _startTime = new Date(this.startTime);
+      let _endTime = new Date(this.endTime);
+      this.getBloodPressureDateOfDuringTime(this.patients[this.btnIsVisited]["patientId"],_startTime,_endTime,'statisticsType');
+    }
   }
 
-  /*获取当天的的血压数值，根据病人的Id号*/
-  public getBloodPressureDataOfToday(patientId:number){
-    let startTime =new Date();
-    startTime.setMilliseconds(0);
-    startTime.setSeconds(0);
-    startTime.setMinutes(0);
-    startTime.setHours(0);
-    //console.log("当前的天的年月日",startTime);
-    let endTime = new Date(startTime.getTime()+1000*60*60*24);
-    //console.log("这一天的后一天",endTime);
-    this.physiologyService.getBloodPressureData(patientId,startTime,endTime,data=>{
-        if(data.hasOwnProperty("success")){
-          this.bloodPressures=data["success"];
-          console.log("血压值",this.bloodPressures);
-          this.mapBloodPressures();
-        }
-        else{
-          this.bloodPressures=null;
-          console.log(data["error"]);
-        }
-    });
-  }
 
-  /*初始化时间选择框*/
-  public initialTimeInput(){
-
-    /*getMonth 返回值是从0 到 11*/
-    let _startTime =new Date();
-    let _startTimeMonth= _startTime.getMonth()+1>=1&&_startTime.getMonth()+1<=9?0+""+(_startTime.getMonth()+1):_startTime.getMonth()+1;
-    let _startTimeDay =  _startTime.getDate()>=1&&_startTime.getDate()<=9?0+""+_startTime.getDate():_startTime.getDate();
-    this.startTime=_startTime.getFullYear()+"-"+_startTimeMonth+"-"+_startTimeDay;
-    /*console.log("当前时间",_startTime);
-    console.log("当前具体时间",_startTime.getDate());*/
-    _startTime.setMilliseconds(0);
-    _startTime.setSeconds(0);
-    _startTime.setMinutes(0);
-    _startTime.setHours(0);
-    //console.log("当前的天的年月日",startTime);
-    let _endTime = new Date(_startTime.getTime()+1000*60*60*24);
-    let _endTimeMonth = _endTime.getMonth()>=1+1&&_endTime.getMonth()+1<=9?0+""+(_endTime.getMonth()+1):_endTime.getMonth()+1;
-    let _endTimeDay =  _endTime.getDate()>=1&&_endTime.getDate()<=9?0+""+_endTime.getDate():_endTime.getDate();
-    this.endTime=_endTime.getFullYear()+"-"+_endTimeMonth+"-"+_endTimeDay;
-
-  }
 
   /*根据病人的ID号筛选时间，获取病人在该时间段的血压值*/
-  public  getBloodPressureDateOfDuringTime(patiantId:number,_startTime:Date,_endTime:Date){
+  public  getBloodPressureDateOfDuringTime(patiantId:number,_startTime:Date,_endTime:Date,selectType:string){
     this.physiologyService.getBloodPressureData(patiantId,_startTime,_endTime,data=>{
       if(data.hasOwnProperty("success")){
         this.bloodPressures=data["success"];
-        this.mapBloodPressures();
+        this.mapBloodPressures(selectType);
       }
       else {
         this.bloodPressures=null;
@@ -170,24 +129,68 @@ export class BpPage{
     });
   }
 
-  /*血压数据中的遍历,重新画图*/
-  public mapBloodPressures(){
-    this.timeLabel = new Array();
-    this.bloodPressureValues=new Array();
-    for(let bloodPressure of this.bloodPressures){
-      let dateTime = new Date(bloodPressure["time"]);
 
-      this.timeLabel.push(bloodPressure["time"]);
-      this.bloodPressureValues.push(bloodPressure["value"]);
+  /*初始化时间选择框*/
+  public initialTimeInput(){
+    /*getMonth 返回值是从0 到 11*/
+    let _startTime =new Date();
+    let _startTimeMonth= _startTime.getMonth()+1>=1&&_startTime.getMonth()+1<=9?0+""+(_startTime.getMonth()+1):_startTime.getMonth()+1;
+    let _startTimeDay =  _startTime.getDate()>=1&&_startTime.getDate()<=9?0+""+_startTime.getDate():_startTime.getDate();
+    this.startTime=_startTime.getFullYear()+"-"+_startTimeMonth+"-"+_startTimeDay;
+    this.curve_startTime =_startTime.getFullYear()+"-"+_startTimeMonth+"-"+_startTimeDay;
+    _startTime.setMilliseconds(0);
+    _startTime.setSeconds(0);
+    _startTime.setMinutes(0);
+    _startTime.setHours(0);
+    let _endTime = new Date(_startTime.getTime()+1000*60*60*24);
+    let _endTimeMonth = _endTime.getMonth()>=1+1&&_endTime.getMonth()+1<=9?0+""+(_endTime.getMonth()+1):_endTime.getMonth()+1;
+    let _endTimeDay =  _endTime.getDate()>=1&&_endTime.getDate()<=9?0+""+_endTime.getDate():_endTime.getDate();
+    this.endTime=_endTime.getFullYear()+"-"+_endTimeMonth+"-"+_endTimeDay;
+
+  }
+
+
+  /*血压数据中的遍历,重新画图*/
+  public mapBloodPressures(mapType:string){
+
+    if(mapType=='curveType'){
+      this.timeLabel = new Array();
+      this.bloodPressureValues_1=new Array();
+      this.bloodPressureValues_0=new Array();
+      for(let bloodPressure of this.bloodPressures){
+        if(bloodPressure["type"]==1){
+          this.bloodPressureValues_1.push(bloodPressure["value"]);
+          this.timeLabel.push(bloodPressure['time'].toString().split("T")[1]);
+        }
+        if(bloodPressure["type"]==0){
+          this.bloodPressureValues_0.push(bloodPressure["value"]);
+        }
+
+      }
+      this.drawGraph();
     }
-    console.log("timeLabel",this.timeLabel);
-    console.log("bloodPressureValues",this.bloodPressureValues);
-    this.drawGraph();
+    if(mapType=="statisticsType"){
+      this.timeLabel = new Array();
+      this.bloodPressureValues_1=new Array();
+      this.bloodPressureValues_0=new Array();
+      for(let bloodPressure of this.bloodPressures){
+        if(bloodPressure["type"]==1){
+          this.bloodPressureValues_1.push(bloodPressure["value"]);
+          this.timeLabel.push(bloodPressure['time'].toString().split("T")[1]);
+        }
+        if(bloodPressure["type"]==0){
+          this.bloodPressureValues_0.push(bloodPressure["value"]);
+        }
+
+      }
+      this.drawGraph_statistics();
+    }
+
   }
 
   /*画图*/
   public  drawGraph(): void {
-
+    HighchartsNoData(Highcharts);
     Highcharts.setOptions({
       lang: {
         noData: '暂无数据'
@@ -210,14 +213,15 @@ export class BpPage{
         crosshair: {  //点击显示十字线格子
           width: 1,
           color: 'green'
-        }
+        },
+        gridLineWidth:1
       },
       yAxis: {
         title: {
           align: 'high',
           offset: -60,
           text: '血压值 (mm Hg)',
-          rotation: 10,
+          rotation: 0,
           y: -20
         },
         plotLines:[{
@@ -225,10 +229,15 @@ export class BpPage{
           dashStyle:'solid',     //默认值，这里定义为实线
           value:120,               //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
           width:1                //标示线的宽度，2px
-        }],
+        },
+          {
+            color:'yellow',           //线的颜色，定义为红色
+            dashStyle:'solid',     //默认值，这里定义为实线
+            value:80,               //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+            width:1                //标示线的宽度，2px
+          }],
         min:0,
         allowDecimals:true,
-        alternateGridColor: '#FDFFD5',
         crosshair: {
           width: 1,
           color: 'green'
@@ -241,9 +250,14 @@ export class BpPage{
         verticalAlign: 'middle'
       },
       series: [{
-        name: '某个时间段血压',
-        data: this.bloodPressureValues
-      }],
+              name: '某个时间段收缩压',
+              data: this.bloodPressureValues_1,
+              color:"blue"
+                },
+              { name:'某个时间段舒张压',
+                data:this.bloodPressureValues_0,
+                color: '#FF0000'
+              }],
       responsive: {
         rules: [{
           condition: {
@@ -268,4 +282,97 @@ export class BpPage{
     });
   }
 
+
+  /*统计画图*/
+  public  drawGraph_statistics(): void {
+    HighchartsNoData(Highcharts);
+    Highcharts.setOptions({
+      lang: {
+        noData: '暂无数据'
+      }
+    });
+
+    var chart = Highcharts.chart('container_statistics', {
+      title: {
+        text: '病人的血压值'
+      },
+      xAxis:{
+        title:{
+          text:'时间'
+        },
+        enabled:false,
+        labels: {    //刻度居中显示
+          align: 'center'
+        },
+        crosshair: {  //点击显示十字线格子
+          width: 1,
+          color: 'green'
+        },
+        gridLineWidth:1
+      },
+      yAxis: {
+        title: {
+          align: 'high',
+          offset: -60,
+          text: '血压值 (mm Hg)',
+          rotation: 0,
+          y: -20
+        },
+        plotLines:[{
+          color:'red',           //线的颜色，定义为红色
+          dashStyle:'solid',     //默认值，这里定义为实线
+          value:120,               //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+          width:1                //标示线的宽度，2px
+        },
+          {
+            color:'yellow',           //线的颜色，定义为红色
+            dashStyle:'solid',     //默认值，这里定义为实线
+            value:80,               //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+            width:1                //标示线的宽度，2px
+          }],
+        min:0,
+        allowDecimals:true,
+        crosshair: {
+          width: 1,
+          color: 'green'
+        },
+        tickAmount: 6
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+      series: [{
+        name: '某个时间段收缩压',
+        data: this.bloodPressureValues_1,
+        color:"blue"
+      },
+        { name:'某个时间段舒张压',
+          data:this.bloodPressureValues_0,
+          color: '#FF0000'
+        }],
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
+            }
+          }
+        }]
+      }
+      ,noData: {
+        style: {
+          fontWeight: 'bold',
+          fontSize: '15px',
+          color: '#303030'
+        }
+      }
+    });
+  }
 }
