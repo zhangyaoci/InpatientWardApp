@@ -61,16 +61,9 @@ export class MenusPage {
   //退出
   exit(){
     /*在**之后，删除以前用信息*/
-    this.informationService.updateIsPopToZeroForInformationUser(this.user["userId"],
-      data=>{
-        if(data.hasOwnProperty("success")){
-          this.storageService.clear();
-          this.userService.destroyData();
-          this.informationService.destroyData();
-          this.app.getRootNav().setRoot(LoginPage);
-        }
-      });
-
+    this.userService.destroyData();
+    this.informationService.destroyData();
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
 }

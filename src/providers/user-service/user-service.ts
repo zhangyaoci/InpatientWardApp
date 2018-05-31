@@ -86,17 +86,11 @@ export class UserServiceProvider {
             res=>{
                 if(res.hasOwnProperty("success")){
                   /*在**之后，删除以前用信息*/
-                  this.informationService.updateIsPopToZeroForInformationUser(this.user["userId"],
-                    data=>{
-                      if(data.hasOwnProperty("success")){
-                        /*清空内存*/
-                        this.informationService.destroyData();
-                        this.destroyData();
-                        this.storageService.clear();
-                      }
-                    });
+                  this.informationService.destroyData();
+                  this.destroyData();
+                  this.storageService.clear();
+                  callback(res);
                 }
-                callback(res);
             },
             err=>{
               callback({"error":"密码修改失败"});

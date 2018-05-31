@@ -52,16 +52,16 @@ export class NewsPage {
       difference = "刚刚";
     }
     else if (timeDifference / 60000 >= 1 && timeDifference / 60000 < 60) {
-      difference = Math.ceil(timeDifference / 60000) + "分钟";
+      difference = Math.ceil(timeDifference / 60000) + "分钟前";
     }
     else if (timeDifference / 3600000 >= 1 && timeDifference / 3600000 < 24) {
-      difference = Math.ceil(timeDifference / 3600000) + "小时";
+      difference = Math.ceil(timeDifference / 3600000) + "小时前";
     }
     else if (timeDifference / (3600000 * 24) >= 1 && timeDifference / (3600000 * 24) < 365) {
-      difference = Math.ceil(timeDifference / (3600000 * 24)) + "天";
+      difference = Math.ceil(timeDifference / (3600000 * 24)) + "天前";
     }
     else {
-      difference = Math.ceil(timeDifference / (3600000 * 24 * 365)) + "年";
+      difference = Math.ceil(timeDifference / (3600000 * 24 * 365)) + "年前";
     }
     return difference;
   }
@@ -75,7 +75,6 @@ export class NewsPage {
           if (data.hasOwnProperty("success")) {
             information["isRead"] = 1;
             /*及时更新到本地数据库*/
-            this.informationService.updateInformationToStorage();
             this.navCtrl.push(NewInfoPage, information);
           }
           console.log(data["errror"]);
