@@ -34,7 +34,8 @@
     <div [ngSwitch]="informationOption">
 
     <ion-list *ngSwitchCase="'sysInfo'" >
-      <ion-item *ngFor="let systemInformation of systemInformations"  class="new_content_1_1" (click)="readingSysInfo(systemInformation)">
+      <ion-item-sliding *ngFor="let systemInformation of systemInformations"  cancelable=false>
+      <ion-item   class="new_content_1_1" (click)="readingSysInfo(systemInformation)">
         <ion-thumbnail item-start>
           <img [src]="systemInformation['patient']['picturePath']">
         </ion-thumbnail>
@@ -50,11 +51,23 @@
             <ion-icon icon-end name="notifications" [color]="systemInformation['isRead']==0?'danger':'primary'"></ion-icon>
           </div>
         </div>
-      </ion-item>
+        </ion-item>
+
+
+        <ion-item-options icon-start >
+          <button ion-button (click)="delete_new(systemInformation)" color="danger">
+            <ion-icon name="trash" ></ion-icon>
+            删除
+          </button>
+        </ion-item-options>
+
+
+      </ion-item-sliding>
     </ion-list>
 
     <ion-list  *ngSwitchCase="'doctorInfo'" >
-      <ion-item *ngFor="let doctorInformation of doctorInformaions"  class="new_content_1_1" (click)="readingSysInfo(doctorInformation)">
+      <ion-item-sliding *ngFor="let doctorInformation of doctorInformaions" cancelable=false>
+      <ion-item   class="new_content_1_1" (click)="readingSysInfo(doctorInformation)">
         <ion-thumbnail item-start>
           <img [src]="doctorInformation['patient']['picturePath']">
         </ion-thumbnail>
@@ -71,6 +84,13 @@
           </div>
         </div>
       </ion-item>
+      <ion-item-options icon-start >
+        <button ion-button (click)="delete_new(doctorInformation)" color="danger">
+          <ion-icon name="trash" ></ion-icon>
+          删除
+        </button>
+      </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </div>
   </ion-scroll>

@@ -121,4 +121,18 @@ export class NewsPage {
       }
     }
   }
+
+
+  private delete_new(new_information:any){
+    this.informationService.deleteInformationState(this.userService.user["userId"], new_information["informationId"],data=>{
+     if(data.hasOwnProperty("success")){
+       this.informationService.getInformation(this.userService.user['userId'],data=>{
+         this.initialInformationData();
+       });
+     }
+     else {
+       console.log("删除消息",data);
+     }
+    });
+  }
 }
